@@ -8,7 +8,7 @@ import TMCreateProfile from './components/UserManagement/TravellerManagement/TMC
 import TMViewProfiles from './components/UserManagement/TravellerManagement/TMViewProfiles';
 import TMActiveDetactiveProfiles from './components/UserManagement/TravellerManagement/TMActiveDeactiveProfile';
 import TMTravellerRegister from './components/UserManagement/TravellerManagement/TMTravellerRegister';
-
+import TMViewRegisteredAcc from './components/UserManagement/TravellerManagement/TMViewRegisteredAcc';
 
 function App() {
   return (
@@ -29,6 +29,7 @@ function App() {
         <Route path='/TMCreateProfile' element={<TMCreateProfile/>}></Route>
         <Route path='/TMViewProfiles' element={<TMViewProfiles/>}></Route>
         <Route path='/TMRegTraveller' element={<TMTravellerRegister/>}></Route>
+        <Route path='/TMViewTravellerAccs' element={<TMViewRegisteredAcc/>}></Route>
         
         {/* Traveller Management Routes - Back Officer */}
         <Route path='/TMactiveDeactiveProfiles' element={<TMActiveDetactiveProfiles/>}></Route>
