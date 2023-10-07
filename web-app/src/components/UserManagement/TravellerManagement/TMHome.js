@@ -14,6 +14,7 @@ const TMHome = () => {
             <a href="/TMViewProfiles">VIEW PROFILE</a>
             <br></br>
             <br></br>
+            <a href="/TMRegTraveller">CREATE TRAVELLER ACCOUNT</a>
             {/* <a href="/TMactiveDeactiveProfiles">Activate Deactivate Profile</a> */}
         </div>
     );

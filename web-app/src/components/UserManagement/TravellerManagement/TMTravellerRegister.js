@@ -2,16 +2,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
 
-const Register = () => {
+const TMTravellerRegister = () => {
 
+    const [nic, setNic] = useState("");
     const [email, setEmail] = useState("");
     const [username, setUserName] = useState("");
     const [fullName, setFullName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [role, setRole] = useState("");
+    const [role] = useState("Traveller");
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
     const navigate = useNavigate();
 
     // const IsValidate = () => {
@@ -50,12 +52,12 @@ const Register = () => {
 
     const handlesubmit = (e) => {
         e.preventDefault();
-        let regobj = { email, username, fullName, password, confirmPassword, role };
-        console.log(regobj);
+        let trRegObj = { nic, email, username, fullName, password, confirmPassword, role };
+        console.log(trRegObj);
         fetch("https://localhost:7084/api/v1/authenticate/register", {
             method: "POST",
             headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(regobj)
+            body: JSON.stringify(trRegObj)
         }).then((res) => {
             swal("Successful!", "Registration Successful ✅ 👏", "success");
             navigate('/login');
@@ -72,9 +74,17 @@ const Register = () => {
                     <form onSubmit={handlesubmit}>
                         <div className="card">
                             <div className="card-header">
-                                <h1 className="text-center">Register</h1>
+                                <h1 className="text-center">Register Traveller</h1>
                             </div>
                             <div className="card-body">
+                                <div className="form-group">
+                                    <label>NIC <span className="errmsg">*</span></label>
+                                    <input
+                                        value={nic}
+                                        onChange={(e) => setNic(e.target.value)}
+                                        className="form-control"
+                                    />
+                                </div>
                                 <div className="form-group">
                                     <label>Email <span className="errmsg">*</span></label>
                                     <input
@@ -142,15 +152,11 @@ const Register = () => {
                                 </div>
                                 <div className="form-group">
                                     <label>Role <span className="errmsg">*</span></label>
-                                    <select
+                                    <input
                                         value={role}
-                                        onChange={(e) => setRole(e.target.value)}
+                                        readOnly
                                         className="form-control"
-                                    >
-                                        <option value="">Select Role</option>
-                                        <option value="Back Officer">Back Officer</option>
-                                        <option value="Travel Agent">Travel Agent</option>
-                                    </select>
+                                    />
                                 </div>
                             </div>
                             <div className="card-footer text-center">
@@ -158,7 +164,7 @@ const Register = () => {
                                     Register
                                 </button>
                                 <br></br><br></br>
-                                <h7>Already have an account click </h7><a href="/login">login</a>
+                                {/* <h7>Already have an account click </h7><a href="/login">login</a> */}
                             </div>
                         </div>
                     </form>
@@ -168,4 +174,4 @@ const Register = () => {
     );
 }
 
-export default Register;
+export default TMTravellerRegister;
