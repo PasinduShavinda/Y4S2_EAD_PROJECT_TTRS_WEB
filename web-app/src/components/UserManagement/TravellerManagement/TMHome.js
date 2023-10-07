@@ -1,7 +1,11 @@
+import React from "react";
+import Navbar from "../../Common/NavBar/Navbar";
+
 const TMHome = () => {
 
     return (
         <div>
+            <Navbar /> 
             <h1>Travel Management Home</h1>
             <br></br>
             <a href="/TMCreateProfile">CREATE PROFILE</a>

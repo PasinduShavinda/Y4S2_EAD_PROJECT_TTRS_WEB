@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
 
 const Register = () => {
@@ -148,8 +148,8 @@ const Register = () => {
                                         className="form-control"
                                     >
                                         <option value="">Select Role</option>
-                                        <option value="BACK_OFFICER">Back Officer</option>
-                                        <option value="TRAVEL_AGENT">Travel Agent</option>
+                                        <option value="Back Officer">Back Officer</option>
+                                        <option value="Travel Agent">Travel Agent</option>
                                     </select>
                                 </div>
                             </div>

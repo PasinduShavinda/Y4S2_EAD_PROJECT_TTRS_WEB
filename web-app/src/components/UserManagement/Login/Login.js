@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
 
 const Login = () => {
@@ -36,9 +36,9 @@ const Login = () => {
               sessionStorage.setItem('accessToken', resp.accessToken);
       
               // Check the user's role and navigate accordingly
-              if (resp.role === 'TRAVEL_AGENT') {
+              if (resp.role === 'Travel Agent') {
                 usenavigate('/TMHome');
-              } else if (resp.role === 'BACK_OFFICER') {
+              } else if (resp.role === 'Back Officer') {
                 usenavigate('/TMactiveDeactiveProfiles');
               } else {
                 // Handle other roles or navigate to a default route
