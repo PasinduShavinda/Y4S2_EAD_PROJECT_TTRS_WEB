@@ -156,11 +156,9 @@ const Register = () => {
                             <div className="card-footer text-center">
                                 <button type="submit" className="btn btn-primary">
                                     Register
-                                </button>{" "}
-                                |
-                                <Link to={"/login"} className="btn btn-danger">
-                                    Close
-                                </Link>
+                                </button>
+                                <br></br><br></br>
+                                <h7>Already have an account click </h7><a href="/login">login</a>
                             </div>
                         </div>
                     </form>
