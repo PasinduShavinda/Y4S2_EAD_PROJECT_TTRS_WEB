@@ -60,7 +60,7 @@ const Homepage = () => {
                       
                   </h1>
                   <p>Online Advance Train Seats Reservation</p>
-                  <a href="">
+                  <a href="/admin">
                   Book Your Seats
                   
                   </a>
@@ -75,7 +75,7 @@ const Homepage = () => {
                       
                   </h1>
                   <p>Online Advance Train Seats Reservation</p>
-                  <a href="">
+                  <a href="/admin">
                   Book Your Seats
                   
                   </a>
@@ -90,7 +90,7 @@ const Homepage = () => {
                       
                   </h1>
                   <p>Online Advance Train Seats Reservation</p>
-                  <a href="">
+                  <a href="/admin">
                   Book Your Seats
                   
                   </a>
@@ -118,21 +118,21 @@ const Homepage = () => {
           <div class="col-lg-8">
             <div class="form-row">
               <div class="col-md-6">
-                <label for="parkingName">Pick Up Locaion</label>
+                <label for="parkingName">From</label>
                 <input type="text" class="form-control" placeholder="acb "/>
               </div>
               <div class="col-md-6">
-                <label for="parkingNumber">Drop Location</label>
+                <label for="parkingNumber">To</label>
                 <input type="text" class="form-control" placeholder="acb "/>
               </div>
             </div>
             <div class="form-row">
               <div class="col-md-6">
-                <label for="parkingName">Pick Up Date</label>
+                <label for="parkingName">Date</label>
                 <input type="text" class="form-control" placeholder="07/09/2020"/>
               </div>
               <div class="col-md-6">
-                <label for="parkingNumber">Return Date</label>
+                <label for="parkingNumber">Number of passenges</label>
                 <input type="text" class="form-control" placeholder="07/09/2020"/>
               </div>
             </div>
