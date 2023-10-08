@@ -1,0 +1,84 @@
+
+  /* TrainForm.css */
+/* Styles for the form container */
+.form-container {
+    max-width: 1000px; /* Adjust the width as needed */
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Create two equal-width columns */
+    grid-gap: 15px; /* Adjust the gap between columns and rows */
+  }
+  
+  /* Styles for form labels */
+  .form-label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* Styles for form inputs and selects */
+  .form-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    
+  }
+  
+  /* Style the submit button */
+  .form-button {
+    grid-column: span 2; /* Span across both columns */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .form-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .form-column {
+    display: flex; /* Use flexbox to create a two-column layout */
+    justify-content: space-between; /* Space between columns */
+  }
+  
+  .form-group {
+    flex: 0 0 calc(50% - 20px); 
+    margin-bottom: 20px; 
+  }
+  
+  /* Adjust spacing between columns and form elements as needed */
+  .form-input {
+    width: 100%;
+    /* Other input styles */
+  }
+  /* Styles for the table */
+  .table-container {
+    margin-top: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  th {
+    background-color: #007bff;
+    color: #fff;
+  }
+ 
