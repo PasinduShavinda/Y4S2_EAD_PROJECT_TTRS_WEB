@@ -7,6 +7,7 @@ import CreateTrain from "./components/TrainManagement/CreateTrain/CreateTrain";
 import AdminPage from "./components/AdminPage/AdminPage";
 import TrainSheduls from "./components/TrainManagement/Shedule train/TrainSheduls"
 import ReservationSearch from "./components/ReservationManagement/ReservationSearch"
+import ReservaionListforUser from "./components/ReservationManagement/ReservaionListforUser/ReservaionListforUser"
 function App() {
   return (
     <div className="App">
@@ -19,6 +20,7 @@ function App() {
         <Route path="/admin" element={< AdminPage />} exact />
         <Route path="/shedule/:id" element={< TrainSheduls />} exact />
         <Route path="/reservationserch" element={< ReservationSearch />} exact />
+        <Route path="/reservationsUser" element={< ReservaionListforUser />} exact />
         </Routes>
         </React.Fragment>
     </div>

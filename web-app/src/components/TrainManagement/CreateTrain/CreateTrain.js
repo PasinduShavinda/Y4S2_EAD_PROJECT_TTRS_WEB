@@ -21,20 +21,129 @@ function TrainForm() {
   const [response, setResponse] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [arrivalCityOptions, setArrivalCityOptions] = useState([
-    'City 1',
-    'City 2',
-    'City 3', // Add more city options as needed
+    'Colombo Fort',
+    'Maradana',
+    'Colombo Slave Island',
+    'Kandy',
+    'Gampaha' ,
+    'Negombo' ,
+    'Anuradhapura' ,
+    'Polonnaruwa' ,
+    'Badulla',
+    'Matara' ,
+    'Galle' ,
+    'Hikkaduwa' ,
+    'Mount Lavinia',
+    'Avissawella' ,
+    'Ragama',
+    'Kurunegala' ,
+    'Chilaw' ,
+    'Trincomalee' ,
+    'Batticaloa',
+    'Jaffna',
+    'Polgahawela' ,
+    'Nawalapitiya' ,
+    'Hatton',
+    'Ella' ,
+    'Rambukkana' ,
+    'Kegalle' ,
+    'Haputale' ,
+    'Nuwara Eliya' ,
+    'Demodara' ,
+    'Ohiya' ,
+    'Nanu Oya' ,
+    'Bandarawela',
+    'Diyatalawa' ,
+    'Aluthgama',
+    'Bentota' ,
+    'Ambalangoda' ,
+    'Kalutara',
+    'Panadura' ,
+    'Wadduwa' ,
+    'Beruwala'  
   ]);
   
   const [departureCityOptions, setDepartureCityOptions] = useState([
-    'City A',
-    'City B',
-    'City C', // Add more city options as needed
+    'Colombo Fort',
+    'Maradana',
+    'Colombo Slave Island',
+    'Kandy',
+    'Gampaha' ,
+    'Negombo' ,
+    'Anuradhapura' ,
+    'Polonnaruwa' ,
+    'Badulla',
+    'Matara' ,
+    'Galle' ,
+    'Hikkaduwa' ,
+    'Mount Lavinia',
+    'Avissawella' ,
+    'Ragama',
+    'Kurunegala' ,
+    'Chilaw' ,
+    'Trincomalee' ,
+    'Batticaloa',
+    'Jaffna',
+    'Polgahawela' ,
+    'Nawalapitiya' ,
+    'Hatton',
+    'Ella' ,
+    'Rambukkana' ,
+    'Kegalle' ,
+    'Haputale' ,
+    'Nuwara Eliya' ,
+    'Demodara' ,
+    'Ohiya' ,
+    'Nanu Oya' ,
+    'Bandarawela',
+    'Diyatalawa' ,
+    'Aluthgama',
+    'Bentota' ,
+    'Ambalangoda' ,
+    'Kalutara',
+    'Panadura' ,
+    'Wadduwa' ,
+    'Beruwala'  
   ]);
   const stopStationOptions = [
-    { id: 'station1', name: 'Station 1' },
-    { id: 'station2', name: 'Station 2' },
-    { id: 'station3', name: 'Station 3' },
+    { id: '1', name: 'Colombo Fort' },
+    { id: '2', name: 'Maradana' },
+    { id: '3', name: 'Colombo Slave Island' },
+    { id: '4', name: 'Kandy' },
+    { id: '5', name: 'Gampaha' },
+    { id: '6', name: 'Negombo' },
+    { id: '7', name: 'Anuradhapura' },
+    { id: '8', name: 'Polonnaruwa' },
+    { id: '9', name: 'Badulla' },
+    { id: '10', name: 'Matara' },
+    { id: '11', name: 'Galle' },
+    { id: '12', name: 'Hikkaduwa' },
+    { id: '13', name: 'Mount Lavinia' },
+    { id: '14', name: 'Avissawella' },
+    { id: '15', name: 'Ragama' },
+    { id: '16', name: 'Kurunegala' },
+    { id: '17', name: 'Chilaw' },
+    { id: '18', name: 'Trincomalee' },
+    { id: '19', name: 'Batticaloa' },
+    { id: '20', name: 'Jaffna' },
+    { id: '21', name: 'Polgahawela' },
+    { id: '22', name: 'Nawalapitiya' },
+    { id: '23', name: 'Hatton' },
+    { id: '24', name: 'Ella' },
+    { id: '25', name: 'Rambukkana' },
+    { id: '26', name: 'Kegalle' },
+    { id: '27', name: 'Haputale' },
+    { id: '28', name: 'Nuwara Eliya' },
+    { id: '29', name: 'Demodara' },
+    { id: '30', name: 'Nuwara Eliya' },
+    { id: '31', name: 'Ohiya' },
+    { id: '32', name: 'Nanu Oya' },
+    { id: '33', name: 'Bandarawela' },
+    { id: '34', name: 'Ambalangoda' },
+    { id: '35', name: 'Kalutara' },
+    { id: '36', name: 'Panadura' },
+    { id: '37', name: 'Wadduwa' },
+    { id: '38', name: 'Beruwala' },
     // Add more station options as needed
   ];
   
@@ -91,9 +200,11 @@ const handleSubmit = async (e) => {
   return (
     <div>
      
-  <h2>Add Train Details</h2>
+ 
   <div className="form-container">
+  
   <form onSubmit={handleSubmit}>
+  <h1>Add Train Details</h1>
     <div >
       <div className="form-group">
         <label htmlFor="trainName" className="form-label">Train Name:</label>
@@ -106,6 +217,17 @@ const handleSubmit = async (e) => {
           className="form-input"
         />
       </div>
+      <div className="form-group">
+  <label htmlFor="StopStations" className="form-label">Stop Stations:</label>
+  <Multiselect
+    options={stopStationOptions}
+    displayValue="name"
+    selectedValues={selectedStations}
+    onSelect={(selectedList) => setSelectedStations(selectedList)}
+    onRemove={(selectedList) => setSelectedStations(selectedList)}
+    placeholder="Select Stop Stations"
+  />
+</div>
       <div className="form-group">
         <label htmlFor="departureCity" className="form-label">Departure City:</label>
         <select
@@ -168,7 +290,7 @@ const handleSubmit = async (e) => {
       <div className="form-group">
         <label htmlFor="class1reservation" className="form-label">Class 1 Reservation:</label>
         <input
-          type="text"
+          type="number"
           id="class1reservation"
           name="class1reservation"
           value={formData.class1reservation}
@@ -179,7 +301,7 @@ const handleSubmit = async (e) => {
       <div className="form-group">
         <label htmlFor="class1reservation" className="form-label">Class 2 Reservation:</label>
         <input
-          type="text"
+          type="number"
           id="class2reservation"
           name="class2reservation"
           value={formData.class2reservation}
@@ -187,17 +309,7 @@ const handleSubmit = async (e) => {
           className="form-input"
         />
       </div>
-      <div className="form-group">
-  <label htmlFor="StopStations" className="form-label">Stop Stations:</label>
-  <Multiselect
-    options={stopStationOptions}
-    displayValue="name"
-    selectedValues={selectedStations}
-    onSelect={(selectedList) => setSelectedStations(selectedList)}
-    onRemove={(selectedList) => setSelectedStations(selectedList)}
-    placeholder="Select Stop Stations"
-  />
-</div>
+ 
 
     
     <button type="submit" className="form-button">Submit</button>
@@ -209,5 +321,6 @@ const handleSubmit = async (e) => {
     </div>
   );
 }
+
 
 export default TrainForm;
