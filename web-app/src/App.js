@@ -1,5 +1,7 @@
-import './App.css';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './App.css';
 import Home from './components/UserManagement/Home';
 import Login from './components/UserManagement/Login/Login';
 import Register from './components/UserManagement/Registration/Register';
@@ -9,14 +11,18 @@ import TMViewProfiles from './components/UserManagement/TravellerManagement/TMVi
 import TMActiveDetactiveProfiles from './components/UserManagement/TravellerManagement/TMActiveDeactiveProfile';
 import TMTravellerRegister from './components/UserManagement/TravellerManagement/TMTravellerRegister';
 import TMViewRegisteredAcc from './components/UserManagement/TravellerManagement/TMViewRegisteredAcc';
+import Navbar from './components/Common/NavBar/Navbar';
 
+import Homepage from "./components/HomePage/Homepage";
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      <Navbar/>
       <Routes>
 
-        <Route path='/' element={<Home/>}></Route>
+        <Route path="/" element={< Homepage />} exact />
+        <Route path='/shvHome' element={<Home/>}></Route>
 
         {/* Login Registration Routes */}
         <Route path='/login' element={<Login/>}></Route>
@@ -36,7 +42,6 @@ function App() {
 
       </Routes>
       </BrowserRouter>
-      
     </div>
   );
 }
