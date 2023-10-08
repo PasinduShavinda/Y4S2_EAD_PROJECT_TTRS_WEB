@@ -1,0 +1,147 @@
+
+.book_section_inside {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-transform: translateY(75px);
+            transform: translateY(75px);
+  }
+  
+  .book_section_inside .form_container {
+    -webkit-box-flex: 2.5;
+        -ms-flex: 2.5;
+            flex: 2.5;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  
+  .book_section_inside .img-box {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    margin-top: 45px;
+  }
+  
+  .book_section_inside .img-box img {
+    width: 100%;
+  }
+  
+  .book_section_inside form {
+    width: 75%;
+    padding: 15px 35px;
+    background-color: #fefdfc;
+    -webkit-box-shadow: 0px 0px 20px 11px rgba(0, 0, 0, 0.09);
+    box-shadow: 0px 0px 20px 11px rgba(0, 0, 0, 0.09);
+    border-radius: 10px;
+  }
+  
+  .book_section_inside form label {
+    color: #656565;
+    margin-bottom: 2px;
+    margin-top: 10px;
+  }
+  
+  .book_section_inside form .form-control {
+    outline: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    border-radius: 0;
+    border: 1px solid #8e8e8e;
+    color: #000000;
+  }
+  
+  .book_section_inside form .form-control::-webkit-input-placeholder {
+    color: #1d1c1c;
+  }
+  
+  .book_section_inside form .form-control:-ms-input-placeholder {
+    color: #1d1c1c;
+  }
+  
+  .book_section_inside form .form-control::-ms-input-placeholder {
+    color: #1d1c1c;
+  }
+  
+  .book_section_inside form .form-control::placeholder {
+    color: #1d1c1c;
+  }
+  
+  .book_section_inside form .btn-container {
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  
+  .book_section_inside form .btn-container button {
+    display: inline-block;
+    padding: 10px 65px;
+    background-color: #240a5e;
+    color: #fefdfc;
+    border-radius: 0;
+    border: 1px solid #240a5e;
+    margin-top: 25px;
+  }
+  
+  .book_section_inside form .btn-container button:hover {
+    background-color: transparent;
+    color: #240a5e;
+  }
+  
+  .book_section_inside form .btn-container button:hover {
+    color: #1b0847;
+  }
+
+
+/* Add this CSS to style the table container */
+.table-container {
+    margin-top: 40px; /* Increase the margin to create more separation */
+    padding: 20px;
+    background-color: #fefdfc;
+    -webkit-box-shadow: 0px 0px 20px 11px rgba(0, 0, 0, 0.09);
+    box-shadow: 0px 0px 20px 11px rgba(0, 0, 0, 0.09);
+    border-radius: 10px;
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+  }
+  
+  /* Add styles for the table */
+  .table-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table-container th, .table-container td {
+    border: 1px solid #8e8e8e;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .table-container th {
+    background-color: #240a5e;
+    color: #fefdfc;
+  }
+  
+  /* Adjust the height of the form container */
+  .book_section_inside .form_container {
+    -webkit-box-flex: 2.5;
+    -ms-flex: 2.5;
+    flex: 2.5;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-bottom: 120px; /* Add padding to the bottom of the form container */
+  }
+  
