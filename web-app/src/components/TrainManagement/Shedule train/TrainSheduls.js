@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import "./TrainSheduls.css"
 const TrainSheduls = () => {
   const [inputs, setInputs] = useState({});
   const id = useParams().id;
@@ -80,33 +80,43 @@ const TrainSheduls = () => {
 
   return (
     <div>
-      <h2>Train Details</h2>
-
-      <p>Train Name :{inputs.trainName}</p>
-      <p>{inputs.arrivalCity}</p>
-      <p>{inputs.departureCity}</p>
-      <p>{inputs.Arrivaltime}</p>
-      <p>{inputs.Departuretime}</p>
-      <p>{inputs.class1reservation}</p>
-      <p>{inputs.class2reservation}</p>
-      <p>{inputs.stopStations}</p>
-
-      <h1>Show a Date Control</h1>
-
-      <form onSubmit={handleSubmit}>
-        <label>Schedule:</label>
-        <input
-          type="date"
+      <div>
+      <h2>Train Schedule Create</h2>
+      <div className='detailtrain'>
+      <dl>
+  <dt>Train Name </dt>
+  <dd>{inputs.trainName}</dd>
+  <dt>From</dt>
+  <dd>{inputs.departureCity}</dd>
+  <dt>To</dt>
+  <dd>{inputs.arrivalCity}</dd>
+  <dt>Total Number of 1st class seats</dt>
+  <dd>{inputs.class1reservation}</dd>
+  <dt>Total Number of 1st class seats</dt>
+  <dd>{inputs.class2reservation}</dd>
+</dl>
+<form onSubmit={handleSubmit}>
+        
+        
+        <div class="input-group mb-3">
+  <input type="date" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2"  
           id="date"
           name="date"
           value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
-        <input type="submit" value="Submit" />
+          onChange={(e) => setDate(e.target.value)}/>
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="submit">Submit</button>
+  </div>
+</div>
       </form>
+</div>
+
+</div>
+
+     
       <div>
         <div className="table-container">
-      <h2>Table of Data from API:</h2>
+      <h2>Scheduled Trains</h2>
       <table>
         <thead>
           <tr>
@@ -116,8 +126,10 @@ const TrainSheduls = () => {
             <th>Arrival City</th>
             <th>Departure time</th>
             <th>Arrival time</th>
-            <th>Reserved 1st class Seats</th>
-            <th>Reserved 2st class Seats</th>
+            <th>Reserved <br/>
+              1st class Seats</th>
+            <th>Reserved <br/>
+              2st class Seats</th>
             <th>Stop Stations</th>
             <th>date</th>
             <th>schedule</th>
@@ -136,13 +148,19 @@ const TrainSheduls = () => {
       <td>{item.reserved2seates}</td>
       <td>{item.stopStations.join(', ')}</td> 
       <td>{item.date}</td> 
-      <td> <button
-        type="button"
-        className="form-button"
-        onClick={() => handleDelete(item.id)}
-      >
-        Delete
-      </button></td> 
+      <td> 
+      <a className="btn btn-outline-warning" href={`#`}>
+     <i className="fas fa-edit"></i>&nbsp;Edit
+   </a>
+
+   &nbsp;&nbsp;
+   <a className="btn btn-outline-danger" href="#"  onClick={() => handleDelete(item.id)}>
+     <i className="far fa-trash-alt"></i>&nbsp;Delete
+   </a>
+      
+      
+      
+      </td> 
     </tr>
   ))}
 </tbody>

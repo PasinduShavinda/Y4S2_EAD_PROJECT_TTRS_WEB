@@ -16,7 +16,46 @@ const ReservationSearch = () => {
   const [seatCount2, setSeatCount2] = useState(0);
   const [selectedRow, setSelectedRow] = useState(null);
 
-  const options = ['Station 1', 'Station 2', 'Station 3', 'Station 4'];
+  const options = [ 'Colombo Fort',
+  'Maradana',
+  'Colombo Slave Island',
+  'Kandy',
+  'Gampaha' ,
+  'Negombo' ,
+  'Anuradhapura' ,
+  'Polonnaruwa' ,
+  'Badulla',
+  'Matara' ,
+  'Galle' ,
+  'Hikkaduwa' ,
+  'Mount Lavinia',
+  'Avissawella' ,
+  'Ragama',
+  'Kurunegala' ,
+  'Chilaw' ,
+  'Trincomalee' ,
+  'Batticaloa',
+  'Jaffna',
+  'Polgahawela' ,
+  'Nawalapitiya' ,
+  'Hatton',
+  'Ella' ,
+  'Rambukkana' ,
+  'Kegalle' ,
+  'Haputale' ,
+  'Nuwara Eliya' ,
+  'Demodara' ,
+  'Ohiya' ,
+  'Nanu Oya' ,
+  'Bandarawela',
+  'Diyatalawa' ,
+  'Aluthgama',
+  'Bentota' ,
+  'Ambalangoda' ,
+  'Kalutara',
+  'Panadura' ,
+  'Wadduwa' ,
+  'Beruwala'  ];
 
   const formatDateForApi = (date) => {
     const year = date.getFullYear();
@@ -89,13 +128,15 @@ const ReservationSearch = () => {
 
   return (
     <div className=''>
+        <h1>Online Advance Train Seats Reservation</h1>
       <section className="book_section_inside">
+      
         <div className="form_container">
-          <form onSubmit={handleSearch}>
-            <div className="form-row">
-              <div className="col-lg-8">
-                <div className="form-row">
-                  <div className="col-md-6">
+      <div class="container">
+      <form onSubmit={handleSearch}>
+  <div class="row">
+    <div class="col-sm ">
+    
                     <label htmlFor="from">From</label>
                     <select
                       className="form-control"
@@ -111,8 +152,9 @@ const ReservationSearch = () => {
                       ))}
                     </select>
                   </div>
-                  <div className="col-md-6">
-                    <label htmlFor="to">To</label>
+    
+    <div class="col-sm">
+    <label htmlFor="to">To</label>
                     <select
                       className="form-control"
                       value={to}
@@ -126,11 +168,9 @@ const ReservationSearch = () => {
                         </option>
                       ))}
                     </select>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="col-md-6">
-                    <label htmlFor="date">Date</label>
+    </div>
+    <div class="col-sm">
+    <label htmlFor="date">Date</label>
                     <DatePicker
                       selected={date}
                       onChange={(newDate) => setDate(newDate)}
@@ -138,21 +178,19 @@ const ReservationSearch = () => {
                       placeholderText="Select a date"
                       className="form-control"
                     />
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4">
-                <div className="btn-container">
-                  <button type="submit" className="">
+    </div>
+    <div class="col-sm">
+    <div className="btn-container">
+    <button type="submit" class="btn btn-outline-secondary btn-lg">
                     Search
                   </button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </section>
-
+                  </div>
+    </div>
+  </div>
+  </form>
+</div>
+</div>
+</section>
       {loading && <p>Loading...</p>}
       <div className="table-container">
         {scheduleData.length > 0 && (
@@ -194,25 +232,31 @@ const ReservationSearch = () => {
 
       {selectedRow && (
         <div className="selected-row-details">
-          <h2>Selected Train Details</h2>
-          <ul>
-            <li>Train Name: {selectedRow.trainName}</li>
-            <li>Departure City: {selectedRow.departureCity}</li>
-            <li>Arrival City: {selectedRow.arrivalCity}</li>
-            <li>Departure Time: {selectedRow.departuretime}</li>
-            <li>Arrival Time: {selectedRow.arrivaltime}</li>
-            
-            {/* Add more details here */}
-          </ul>
-        </div>
-      )}
+          <h2>Complete Reservation</h2>
+        
+           <div className='detailtrain'>
+           <form onSubmit={handleBookingSubmit}>
+      <dl>
+  <dt>Train Name </dt>
+  <dd className='dd_book'>{selectedRow.trainName}</dd>
+  <dt>From</dt>
+  <dd className='dd_book'>{selectedRow.departureCity}</dd>
+  <dt>To</dt>
+  <dd className='dd_book'>{selectedRow.arrivalCity}</dd>
+  <dt> Departure Time</dt>
+  <dd className='dd_book'>{selectedRow.departuretime}</dd>
+  <dt> Arival Time</dt>
+  <dd className='dd_book'>{selectedRow.arrivaltime}</dd>
 
+  </dl>
+  <ul> <li className='font-weight-bold text-justify'>Train will stop at  {selectedRow.stopStations.join(', ')}</li></ul>
+ 
 {showBookingForm && (
-        <div className='book_section_inside'>
-          <form onSubmit={handleBookingSubmit}>
+        <div className='bookingcomplete'>
+          
             <div className="form-row">
               <div className="col-md-6">
-                <label htmlFor="seatCount1">Seatcount1</label>
+                <label htmlFor="seatCount1" className='font-weight-bold'>Number of 1st class seats</label>
                 <input
                   type="number"
                   className="form-control"
@@ -222,7 +266,7 @@ const ReservationSearch = () => {
                 />
               </div>
               <div className="col-md-6">
-                <label htmlFor="seatCount2">Seatcount2</label>
+              <label htmlFor="seatCount1" className='font-weight-bold'> Number of 2nd class seats</label>
                 <input
                   type="number"
                   className="form-control"
@@ -232,12 +276,22 @@ const ReservationSearch = () => {
                 />
               </div>
             </div>
-            <button type="submit" className="btn btn-primary">
-              Confirm Booking
-            </button>
-          </form>
+          
+          
         </div>
       )}
+      
+
+<button type="submit" className="confirmbooking">
+              Confirm Booking
+            </button>
+</form>
+</div>
+
+
+        </div>
+      )}
+
     </div>
   );
 };

@@ -2,15 +2,15 @@
   /* TrainForm.css */
 /* Styles for the form container */
 .form-container {
-    max-width: 1000px; /* Adjust the width as needed */
+    max-width: 1000px; 
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Create two equal-width columns */
-    grid-gap: 15px; /* Adjust the gap between columns and rows */
+    margin-top: 20px;
+    
   }
   
   /* Styles for form labels */

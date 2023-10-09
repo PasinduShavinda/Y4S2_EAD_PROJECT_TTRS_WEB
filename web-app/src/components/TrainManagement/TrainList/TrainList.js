@@ -1,5 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
+import "./TrainList.css"
+import "../Shedule train/TrainSheduls.css"
 const TrainList = () => {
 
   const [response, setResponse] = useState([]);
@@ -27,7 +29,7 @@ const TrainList = () => {
   return (
     <div>
         <div className="table-container">
-      <h2>Table of Data from API:</h2>
+      <h2>Trains of Srilanka</h2>
       <table>
         <thead>
           <tr>
@@ -55,7 +57,17 @@ const TrainList = () => {
       <td>{item.class1reservation}</td>
       <td>{item.class2reservation}</td>
       <td>{item.stopStations.join(', ')}</td> 
-      <td><a href={`/shedule/${item.id}`}> <button type="submit" className="form-button">schedule</button></a></td> 
+      <td><a href={`/shedule/${item.id}`}> <button type="submit" className="btn btn-outline-info"> <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;schedule</button></a>
+      &nbsp;&nbsp;
+      <a className="btn btn-outline-warning" href={`#`}>
+     <i className="fas fa-edit"></i>&nbsp;Edit
+   </a>
+
+   &nbsp;&nbsp;
+   <a className="btn btn-outline-danger" href="#">
+     <i className="far fa-trash-alt"></i>&nbsp;Delete
+   </a>
+      </td> 
     </tr>
   ))}
 </tbody>

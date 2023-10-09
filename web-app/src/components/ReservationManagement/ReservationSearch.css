@@ -85,12 +85,13 @@
   
   .book_section_inside form .btn-container button {
     display: inline-block;
-    padding: 10px 65px;
+    padding: 7px 65px;
     background-color: #240a5e;
     color: #fefdfc;
     border-radius: 0;
     border: 1px solid #240a5e;
     margin-top: 25px;
+    border-radius: 10px;
   }
   
   .book_section_inside form .btn-container button:hover {
@@ -108,8 +109,7 @@
     margin-top: 40px; /* Increase the margin to create more separation */
     padding: 20px;
     background-color: #fefdfc;
-    -webkit-box-shadow: 0px 0px 20px 11px rgba(0, 0, 0, 0.09);
-    box-shadow: 0px 0px 20px 11px rgba(0, 0, 0, 0.09);
+    
     border-radius: 10px;
     overflow-x: auto; /* Enable horizontal scrolling if needed */
   }
@@ -144,4 +144,21 @@
     justify-content: center;
     padding-bottom: 120px; /* Add padding to the bottom of the form container */
   }
-  
+  .bookingcomplete{
+    margin-top: 50px;
+   
+  }
+  .selected-row-details{
+    margin-top: 70px;
+    margin-bottom: 50px;
+
+  }
+  .confirmbooking{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #240a5e;
+    color: #fefdfc;
+    padding: 10px;
+    border-radius:10px
+    
+  }

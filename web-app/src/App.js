@@ -1,5 +1,4 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './components/UserManagement/Home';
@@ -29,7 +28,7 @@ function App() {
       <Routes>
 
         <Route path="/" element={< Homepage />} exact />
-
+       
         <Route path="/CreateTrain" element={< CreateTrain />} exact />
         <Route path="/Trainlist" element={< TrainList />} exact />
         <Route path="/admin" element={< AdminPage />} exact />

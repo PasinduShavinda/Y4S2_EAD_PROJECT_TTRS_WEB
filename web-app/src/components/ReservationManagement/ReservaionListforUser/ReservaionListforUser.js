@@ -45,7 +45,8 @@ const ReservaionListforUser = () => {
             <th>Date</th>
             <th>1 st Class Seats</th>
             <th>2 st Class Seats</th>
-            
+            <th>Action</th>
+          
             
           </tr>
         </thead>
@@ -58,14 +59,17 @@ const ReservaionListforUser = () => {
       <td>{item.seatcount1}</td>
       <td>{item.seatcount2}</td>
      
-      <td> <button type="submit" className="form-button">update</button></td> 
-      <td> <button
-        type="button"
-        className="form-button"
-        onClick={() => handleDelete(item.id)}
-      >
-        Delete
-      </button></td> 
+      <td> 
+       
+      <a className="btn btn-outline-warning" href={`#`}>
+     <i className="fas fa-edit"></i>&nbsp;Edit
+   </a>
+   &nbsp;&nbsp;
+
+   <a className="btn btn-outline-danger" href="#"  onClick={() => handleDelete(item.id)}>
+     <i className="far fa-trash-alt"></i>&nbsp;Delete
+   </a>
+      </td> 
     </tr>
   ))}
 </tbody>

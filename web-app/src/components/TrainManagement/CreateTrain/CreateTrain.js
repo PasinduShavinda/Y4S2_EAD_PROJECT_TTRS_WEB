@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-
+import 'react-time-picker/dist/TimePicker.css';
+import 'react-clock/dist/Clock.css';
 import './TrainForm.css';
 import Multiselect from 'multiselect-react-dropdown';
-
+import TimePicker from 'react-time-picker';
 function TrainForm() {
+  const [Arrivaltime, setArrivaltime] = useState('00:00'); 
+  const [Departuretime, setDeparturetime] = useState('00:00'); 
   const [formData, setFormData] = useState({
     trainName: '',
     departureCity: '',
@@ -144,7 +147,7 @@ function TrainForm() {
     { id: '36', name: 'Panadura' },
     { id: '37', name: 'Wadduwa' },
     { id: '38', name: 'Beruwala' },
-    // Add more station options as needed
+ 
   ];
   
   
@@ -153,19 +156,19 @@ const handleInputChange = (e) => {
   if (name === 'stopStations') {
     // Convert selectedStations to an array of strings
     const selectedStationsArray = selectedStations.map((station) => station.name);
-    console.log(`selected stations${selectedStations}`)
+    
     setFormData({ ...formData, [name]: selectedStationsArray });
   } else {
     setFormData({ ...formData, [name]: value });
   }
 };
 
-// Inside handleSubmit, add more detailed error handling
+
 const handleSubmit = async (e) => {
   e.preventDefault();
 
   try {
-    // Convert selectedStations to an array of strings
+  
     const selectedStationsArray = selectedStations.map((station) => station.name);
 
     const updatedFormData = { ...formData, stopStations: selectedStationsArray };
@@ -181,14 +184,12 @@ const handleSubmit = async (e) => {
     if (response.ok) {
       const data = await response.json();
       setResponse(data);
-      // Reload the page after a successful submit
+      
       window.location.reload();
     } else {
       const errorData = await response.json();
       console.error('Error:', response.status, errorData);
 
-      // Display the error message to the user (you can set it in state)
-      // Example: setError(errorData.errors.StopStations[0]);
     }
   } catch (error) {
     console.error('Error:', error);
@@ -206,6 +207,7 @@ const handleSubmit = async (e) => {
   <form onSubmit={handleSubmit}>
   <h1>Add Train Details</h1>
     <div >
+    <div class="row">
       <div className="form-group">
         <label htmlFor="trainName" className="form-label">Train Name:</label>
         <input
@@ -228,6 +230,8 @@ const handleSubmit = async (e) => {
     placeholder="Select Stop Stations"
   />
 </div>
+</div>
+<div class="row">
       <div className="form-group">
         <label htmlFor="departureCity" className="form-label">Departure City:</label>
         <select
@@ -263,7 +267,8 @@ const handleSubmit = async (e) => {
         </select>
       </div>
     </div>
-    
+    </div>
+    <div class="row">
       <div className="form-group">
         <label htmlFor="Departuretime" className="form-label">Departure Time:</label>
         <input
@@ -274,6 +279,8 @@ const handleSubmit = async (e) => {
           onChange={handleInputChange}
           className="form-input"
         />
+             {/* <TimePicker onChange={setDeparturetime} value={Departuretime}  className="form-input"/> */}
+         
       </div>
       <div className="form-group">
         <label htmlFor="Arrivaltime" className="form-label">Arrival Time:</label>
@@ -285,8 +292,12 @@ const handleSubmit = async (e) => {
           onChange={handleInputChange}
           className="form-input"
         />
+         {/* <TimePicker id="Arrivaltime"
+          name="Arrivaltime" onChange={setArrivaltime} value={Arrivaltime}  className="form-input"/> */}
       
       </div>
+      </div>
+      <div class="row">
       <div className="form-group">
         <label htmlFor="class1reservation" className="form-label">Class 1 Reservation:</label>
         <input
@@ -310,13 +321,13 @@ const handleSubmit = async (e) => {
         />
       </div>
  
-
+</div>
     
     <button type="submit" className="form-button">Submit</button>
   </form>
 </div>
 
-<a href="/Trainlist"> <button type="submit" className="form-button">trainlist</button></a>
+
 
     </div>
   );
