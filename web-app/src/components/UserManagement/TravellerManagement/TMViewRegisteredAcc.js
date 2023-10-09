@@ -191,6 +191,7 @@ const TMViewRegisteredAcc = () => {
         handleShowProfile();
         fetch(`https://localhost:7084/api/v1/traveller/view/${nic}`, {
             headers: {
+                method:'GET',
                 'Authorization': 'bearer ' + Token
             }
         })
@@ -260,6 +261,39 @@ const TMViewRegisteredAcc = () => {
             });
     }
 
+    const handleDeleteProfile = (nic) => {
+        // Show a confirmation dialog
+        swal({
+          title: 'Are you sure?',
+          text: 'Once deleted, you will not be able to recover this profile!',
+          icon: 'warning',
+          buttons: true,
+          dangerMode: true,
+        }).then((willDelete) => {
+          if (willDelete) {
+
+            fetch(`https://localhost:7084/api/v1/traveller/delete/${nic}`, {
+              method: 'DELETE',
+              headers: {
+                'Authorization': 'bearer ' + Token,
+              },
+            }).then((res) => {
+              if (res.status === 401) {
+                swal('Unauthorized!', 'Access Denied 🚫', 'error');
+                return null;
+              } else if (res.ok) {
+                swal('Success!', 'Profile has been deleted!', 'success');
+              } else {
+                swal('Cancelled', 'The profile has not been deleted.', 'info');
+              }
+            });
+          }
+        });
+      };
+      
+
+  
+
     return (
         <div className="container">
             <div className="card" style={{ marginTop: '30px' }}>
@@ -326,14 +360,17 @@ const TMViewRegisteredAcc = () => {
 
                                         <td>
                                             <center>
-                                                <button className="btn btn-danger" disabled={UserRole === 'BackOfficer'} onClick={() => handleCreateForm(item.nic)}>
+                                                <button className="btn btn-info" disabled={UserRole === 'BackOfficer'} onClick={() => handleCreateForm(item.nic)}>
                                                     Create
                                                 </button> &nbsp;
                                                 <button className="btn btn-success" disabled={UserRole === 'BackOfficer'} onClick={() => handleUpdateForm(item.nic)}>
                                                     Update
                                                 </button> &nbsp;
-                                                <button className="btn btn-info" disabled={UserRole === 'BackOfficer'} onClick={() => handleViewProfile(item.nic)}>
+                                                <button className="btn btn-dark" disabled={UserRole === 'BackOfficer'} onClick={() => handleViewProfile(item.nic)}>
                                                     View
+                                                </button> &nbsp;
+                                                <button className="btn btn-danger" disabled={UserRole === 'BackOfficer'} onClick={() => handleDeleteProfile(item.nic)}>
+                                                    Delete
                                                 </button>
                                             </center>
                                         </td>
