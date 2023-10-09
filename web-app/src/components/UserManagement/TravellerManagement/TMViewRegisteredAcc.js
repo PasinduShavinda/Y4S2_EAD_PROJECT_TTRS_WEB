@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import YelBulb from "../../../assets/yelblb.png"
 import BlckBulb from "../../../assets/blackblb.png"
@@ -12,17 +12,31 @@ const TMViewRegisteredAcc = () => {
 
     const [regTravellers, setRegTravllers] = useState([]);
     const [show, setShow] = useState(false);
-    
+
     const [fullName, setFullName] = useState('');
     const [userName, setUserName] = useState('');
     const [nic, setNic] = useState('');
     const [email, setEmail] = useState('');
+
+    const [gender, setGender] = useState('');
+    const [dob, setDob] = useState('');
+    const [nationality, setNat] = useState('');
+    const [contactNumber, setContact] = useState('');
+    const [address, setAddress] = useState('');
+    const [passportNumber, setPassport] = useState('');
+    const [prefferedLanguage, setLang] = useState('');
+    const [emergencyContactName, setEmName] = useState('');
+    const [relationshipToTraveller, setRelt] = useState('');
+    const [emergencyContactNumber, setEmcont] = useState('');
+
 
     const Token = sessionStorage.getItem('accessToken');
     const UserRole = sessionStorage.getItem('role');
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         LoadRegTravellers();
@@ -93,12 +107,87 @@ const TMViewRegisteredAcc = () => {
         }
     };
 
-    const handleEdit = (nic) => {
+    // Get data to the create profile form
+    const handleCreateForm = async (nic) => {
         handleShow();
+        fetch(`https://localhost:7084/api/v1/regtravellers/view/${nic}`, {
+            headers: {
+                'Authorization': 'bearer ' + Token
+            }
+        })
+            .then(res => {
+                if (res.status === 401) {
+                    swal("Unauthorized!", "Access Denied 🚫 ", "error");
+                    return null;
+                }
+                else if (!res.ok) {
+                    return false;
+                }
+                return res.json();
+            })
+            .then(res => {
+                if (res) {
+                    setNic(res.nic);
+                    setEmail(res.email);
+                    setUserName(res.userName);
+                    setFullName(res.fullName);
+                }
+            });
     }
 
-    const handleUpdate = (nic) => {
+    // Get data to the create profile form
+    const handleUpdateForm = async (nic) => {
         handleShow();
+        fetch(`https://localhost:7084/api/v1/traveller/view/${nic}`, {
+            headers: {
+                'Authorization': 'bearer ' + Token
+            }
+        })
+            .then(res => {
+                if (res.status === 401) {
+                    swal("Unauthorized!", "Access Denied 🚫 ", "error");
+                    return null;
+                }
+                else if (!res.ok) {
+                    return false;
+                }
+                return res.json();
+            })
+            .then(res => {
+                if (res) {
+                    setNic(res.nic);
+                    setEmail(res.email);
+                    setUserName(res.userName);
+                    setFullName(res.fullName);
+                    setAddress(res.address);
+                    setContact(res.contactNumber);
+                    setDob(res.dob);
+                    setNat(res.nationality);
+                    setPassport(res.passportNumber);
+                    setLang(res.prefferedLanguage);
+                    setEmcont(res.emergencyContactNumber);
+                    setRelt(res.relationshipToTraveller);
+                    setEmName(res.emergencyContactName);
+                    setGender(res.gender);
+                }
+            });
+    }
+
+    const handleSave = (e) => {
+        e.preventDefault();
+        let ProfileObj = { fullName, userName, gender, dob, nationality, contactNumber, email, address, nic, passportNumber, prefferedLanguage, emergencyContactName, relationshipToTraveller, emergencyContactNumber };
+        console.log(ProfileObj);
+        fetch("https://localhost:7084/api/v1/traveller/save", {
+            method: "POST",
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(ProfileObj)
+        }).then((res) => {
+            swal("Successful!", "Traveller Profile Successfully Created ✅ 👏", "success");
+            handleClose();
+            navigate('/TMViewTravellerAccs');
+        }).catch((err) => {
+            console.log(err);
+        });
     }
 
     return (
@@ -167,10 +256,15 @@ const TMViewRegisteredAcc = () => {
 
                                         <td>
                                             <center>
-                                                <button className="btn btn-secondary" disabled={UserRole === 'BackOfficer'} onClick={() => handleEdit(item.nic)}>
+                                                <button className="btn btn-secondary" disabled={UserRole === 'BackOfficer'} onClick={() => handleCreateForm(item.nic)}>
                                                     Create
+                                                </button> &nbsp;
+                                                <button className="btn btn-secondary" disabled={UserRole === 'BackOfficer'} onClick={() => handleUpdateForm(item.nic)}>
+                                                    Update
+                                                </button> &nbsp;
+                                                <button className="btn btn-secondary" disabled={UserRole === 'BackOfficer'} onClick={() => handleCreateForm(item.nic)}>
+                                                    View
                                                 </button>
-
                                             </center>
                                         </td>
                                     </tr>
@@ -185,21 +279,76 @@ const TMViewRegisteredAcc = () => {
                         <Modal.Body>
                             <Row>
                                 <Col>
-                                    <input type="text" className="form-control" placeholder="Full Name" value={fullName} onChange={(e)=> setFullName(e.target.value)}/>
+                                    <input type="text" className="form-control" placeholder="Full Name" value={fullName} onChange={(e) => setFullName(e.target.value)} disabled />
                                 </Col>
 
                                 <Col>
-                                    <input type="text" className="form-control" placeholder="User Name" value={userName} onChange={(e)=> setUserName(e.target.value)}/>
+                                    <input type="text" className="form-control" placeholder="User Name" value={userName} onChange={(e) => setUserName(e.target.value)} disabled />
                                 </Col>
                             </Row>
                             <br></br>
                             <Row>
                                 <Col>
-                                    <input type="text" className="form-control" placeholder="NIC" value={nic} onChange={(e)=> setNic(e.target.value)}/>
+                                    <input type="text" className="form-control" placeholder="NIC" value={nic} onChange={(e) => setNic(e.target.value)} disabled />
                                 </Col>
 
                                 <Col>
-                                    <input type="text" className="form-control" placeholder="Email" value={email} onChange={(e)=> setEmail(e.target.value)}/>
+                                    <input type="text" className="form-control" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} disabled />
+                                </Col>
+                            </Row>
+
+                            <br></br>
+                            <Row>
+                                <Col>
+                                    <input type="text" className="form-control" placeholder="Gender" value={gender} onChange={(e) => setGender(e.target.value)} />
+                                </Col>
+
+                                <Col>
+                                    <input type="text" className="form-control" placeholder="DOB" value={dob} onChange={(e) => setDob(e.target.value)} />
+                                </Col>
+                            </Row>
+
+                            <br></br>
+                            <Row>
+                                <Col>
+                                    <input type="text" className="form-control" placeholder="Nationality" value={nationality} onChange={(e) => setNat(e.target.value)} />
+                                </Col>
+
+                                <Col>
+                                    <input type="text" className="form-control" placeholder="Contact" value={contactNumber} onChange={(e) => setContact(e.target.value)} />
+                                </Col>
+                            </Row>
+
+                            <br></br>
+                            <Row>
+                                <Col>
+                                    <input type="text" className="form-control" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
+                                </Col>
+
+                                <Col>
+                                    <input type="text" className="form-control" placeholder="Passport" value={passportNumber} onChange={(e) => setPassport(e.target.value)} />
+                                </Col>
+                            </Row>
+
+                            <br></br>
+                            <Row>
+                                <Col>
+                                    <input type="text" className="form-control" placeholder="Preffered Language" value={prefferedLanguage} onChange={(e) => setLang(e.target.value)} />
+                                </Col>
+
+                                <Col>
+                                    <input type="text" className="form-control" placeholder="Emerg. Contact Name" value={emergencyContactName} onChange={(e) => setEmName(e.target.value)} />
+                                </Col>
+                            </Row>
+
+                            <br></br>
+                            <Row>
+                                <Col>
+                                    <input type="text" className="form-control" placeholder="Relationship" value={relationshipToTraveller} onChange={(e) => setRelt(e.target.value)} />
+                                </Col>
+
+                                <Col>
+                                    <input type="text" className="form-control" placeholder="Emerg. Contact Number" value={emergencyContactNumber} onChange={(e) => setEmcont(e.target.value)} />
                                 </Col>
                             </Row>
                         </Modal.Body>
@@ -207,7 +356,7 @@ const TMViewRegisteredAcc = () => {
                             <Button variant="secondary" onClick={handleClose}>
                                 Close
                             </Button>
-                            <Button variant="primary" onClick={handleUpdate}>
+                            <Button variant="primary" onClick={handleSave}>
                                 Save
                             </Button>
                         </Modal.Footer>
