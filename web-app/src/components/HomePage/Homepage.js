@@ -17,7 +17,8 @@ const Homepage = () => {
           <div class="navbar-collapse" id="">
             <div class="user_option">
               <a href="/TMHome">
-                Login
+                <button>Login</button>
+              
               </a>
             </div>
             <div class="custom_menu-btn">
@@ -59,9 +60,12 @@ const Homepage = () => {
                   Railways
                       
                   </h1>
-                  <p>Online Advance Train Seats Reservation</p>
+                  <p >Online Advance Train Seats Reservation</p>
                   <a href="/admin">
-                  Book Your Seats
+                    <button>
+                    Book Your Seats
+                    </button>
+                 
                   
                   </a>
                 </div>
@@ -74,9 +78,12 @@ const Homepage = () => {
                   Railways
                       
                   </h1>
-                  <p>Online Advance Train Seats Reservation</p>
+                  <p >Online Advance Train Seats Reservation</p>
                   <a href="/admin">
-                  Book Your Seats
+                    <button>
+                    Book Your Seats
+                    </button>
+                 
                   
                   </a>
                 </div>
@@ -89,9 +96,12 @@ const Homepage = () => {
                   Railways
                       
                   </h1>
-                  <p>Online Advance Train Seats Reservation</p>
+                  <p >Online Advance Train Seats Reservation</p>
                   <a href="/admin">
-                  Book Your Seats
+                    <button>
+                    Book Your Seats
+                    </button>
+                 
                   
                   </a>
                 </div>
@@ -111,45 +121,6 @@ const Homepage = () => {
     {/* <!-- end slider section --> */}
   </div>
   {/* <!-- book section --> */}
-  <section class="book_section">
-    <div class="form_container">
-      <form action="">
-        <div class="form-row">
-          <div class="col-lg-8">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="parkingName">From</label>
-                <input type="text" class="form-control" placeholder="acb "/>
-              </div>
-              <div class="col-md-6">
-                <label for="parkingNumber">To</label>
-                <input type="text" class="form-control" placeholder="acb "/>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="parkingName">Date</label>
-                <input type="text" class="form-control" placeholder="07/09/2020"/>
-              </div>
-              <div class="col-md-6">
-                <label for="parkingNumber">Number of passenges</label>
-                <input type="text" class="form-control" placeholder="07/09/2020"/>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="btn-container">
-              <button type="submit" class="">
-                Search
-              </button>
-            </div>
-          </div>
-        </div>
-
-      </form>
-    </div>
-   
-  </section>
 
   
 
@@ -174,7 +145,10 @@ const Homepage = () => {
             Sri Lanka is a fabulous place, safe, friendly and remarkably hassle-free.  Sri Lanka's railways are a great way to get around and a real cultural experience.  The most scenic routes will be highlights of your visit, in particular the wonderful journey from Colombo to Kandy and up into Tea Country and the coastal train from Colombo to Dutch colonial Galle.  British visitors will find the stations, signal boxes and old red semaphore signals very familiar!  This page is a beginner's guide to train travel in Sri Lanka.
             </p>
             <a href="">
+              <button>
               Read More
+              </button>
+             
             </a>
           </div>
         </div>
@@ -374,7 +348,7 @@ In the early days of the railways, the bulk of the freight was carried to the po
 
   {/* <!-- end blog section -->
 
-
+  
 
   {/* <!-- end us section -->
 

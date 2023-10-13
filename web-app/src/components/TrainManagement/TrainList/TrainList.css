@@ -1,4 +1,6 @@
-.table-container  table td:last-child {
-    width: 500px;
-  
+
+
+  .table-container .sug_table table td:last-child {
+    width: 320px; /* Adjust the width as needed */
+    text-align: center; /* Center the content in the last column */
   }

@@ -1,3 +1,9 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//FileName: ReservationSearch.js
+//FileType: VisCode Source file
+//Author : Kalansooriya S. H
+//Description : filter the tarains and create reservations
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 import React, { useState, useEffect } from 'react';
@@ -15,6 +21,7 @@ const ReservationSearch = () => {
   const [seatCount1, setSeatCount1] = useState(0);
   const [seatCount2, setSeatCount2] = useState(0);
   const [selectedRow, setSelectedRow] = useState(null);
+  // List of station options
 
   const options = [ 'Colombo Fort',
   'Maradana',
@@ -56,6 +63,7 @@ const ReservationSearch = () => {
   'Panadura' ,
   'Wadduwa' ,
   'Beruwala'  ];
+   // Function to format date for API
 
   const formatDateForApi = (date) => {
     const year = date.getFullYear();
@@ -85,7 +93,7 @@ const ReservationSearch = () => {
     setSelectedRow(scheduleData[index]);
     setShowBookingForm(true);
   };
- var uid ="wbhebhebhfb"
+ var uid ="test"
   const handleBookingSubmit = async(e) => {
     e.preventDefault();
    
@@ -127,7 +135,7 @@ const ReservationSearch = () => {
   };
 
   return (
-    <div className=''>
+    <div className='shedule_create'>
         <h1>Online Advance Train Seats Reservation</h1>
       <section className="book_section_inside">
       

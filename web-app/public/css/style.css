@@ -57,8 +57,8 @@ body {
 
 .sub_page .header_section {
   position: unset;
-  background: -webkit-gradient(linear, left top, right top, color-stop(75%, transparent), color-stop(75%, #240a5e));
-  background: linear-gradient(to right, transparent 75%, #240a5e 75%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(75%, transparent), color-stop(75%, #240a5e ));
+  background: linear-gradient(to right, transparent 75%, #240a5e  75%);
 }
 
 .header_section {
@@ -225,7 +225,7 @@ a:focus {
 .navbar-brand span {
   font-size: 24px;
   font-weight: 700;
-  color: #240a5e;
+  color: #240a5e ;
 }
 
 .custom_nav-container {
@@ -278,7 +278,7 @@ a:focus {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  background-color: #240a5e;
+  background-color: #240a5e ;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -309,6 +309,13 @@ a:focus {
   color: #fefdfc;
   font-size: 3.5rem;
 }
+.slider_section .slider_container .detail_container .detail-box p {
+  font-family: "Open Sans",
+ sans-serif;
+  
+  color: #f22324;
+  font-size: 1.5rem;
+}
 
 .slider_section .slider_container .detail_container .detail-box a {
   display: inline-block;
@@ -335,7 +342,7 @@ a:focus {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   background-repeat: no-repeat;
-  background-color: #240a5e;
+  background-color: #240a5e ;
   background-size: 20px;
   background-position: center;
 }
@@ -438,16 +445,16 @@ a:focus {
 .book_section form .btn-container button {
   display: inline-block;
   padding: 10px 65px;
-  background-color: #240a5e;
+  background-color: #240a5e ;
   color: #fefdfc;
   border-radius: 0;
-  border: 1px solid #240a5e;
+  border: 1px solid #240a5e ;
   margin-top: 25px;
 }
 
 .book_section form .btn-container button:hover {
   background-color: transparent;
-  color: #240a5e;
+  color: #240a5e ;
 }
 
 .book_section form .btn-container button:hover {
@@ -614,7 +621,7 @@ a:focus {
 }
 
 .rent_section {
-  background-color: #240a5e;
+  background-color: #240a5e ;
 }
 
 .rent_section .heading_container h2 {
@@ -1127,7 +1134,7 @@ a:focus {
 
 /* footer section*/
 .footer_section {
-  background-color: #240a5e;
+  background-color: #240a5e ;
   padding: 20px;
 }
 
@@ -1139,5 +1146,14 @@ a:focus {
 
 .footer_section a {
   color: #fefdfc;
+}
+
+.sug_subtitle{
+  font-family: "Open Sans",
+  sans-serif;
+   text-transform: uppercase;
+   font-weight: bold;
+   color: #fefdfc;
+   font-size: 3.5rem;
 }
 /*# sourceMappingURL=style.css.map */

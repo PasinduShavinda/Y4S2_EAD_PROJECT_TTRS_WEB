@@ -5,14 +5,19 @@
     max-width: 1000px; 
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid  rgba(36, 10, 94, 0.9);
     border-radius: 5px;
-    background-color: #f9f9f9;
+    background-color: #fbfbfb;
     display: grid;
-    margin-top: 20px;
+    margin-top: 70px;
+
     
   }
-  
+  .form-container h1 {
+    color: rgba(36, 10, 94, 0.9) ;
+    margin-bottom: 30px;
+    
+  }
   /* Styles for form labels */
   .form-label {
     display: block;
@@ -34,7 +39,7 @@
   .form-button {
     grid-column: span 2; /* Span across both columns */
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #222c36;
     color: #fff;
     border: none;
     border-radius: 3px;
@@ -42,7 +47,8 @@
   }
   
   .form-button:hover {
-    background-color: #0056b3;
+    background-color: #fcfcfc;
+    color: rgba(36, 10, 94, 0.9);
   }
   
   .form-column {
@@ -81,4 +87,27 @@
     background-color: #007bff;
     color: #fff;
   }
- 
+  /* .form-button:hover  {
+    font-family: "Open Sans",
+   sans-serif;
+    
+    color: #f22324;
+    font-size: 1.5rem;
+  }
+   */
+  .form-button{
+    display: inline-block;
+    padding: 10px 45px;
+    background-color: rgba(36, 10, 94, 0.9);
+    color: #fefdfc;
+    border-radius: 0;
+    border: 1px solid rgba(36, 10, 94, 0.9);
+    text-transform: uppercase;
+    margin-top: 35px;
+  }
+  
+  .form-button:hover :hover {
+    background-color: transparent;
+    color:rgba(36, 10, 94, 0.9);
+  }
+  

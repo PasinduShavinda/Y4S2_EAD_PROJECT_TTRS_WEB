@@ -1,7 +1,13 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//FileName: TrainList.js
+//FileType: VisCode Source file
+//Author : Kalansooriya S. H
+//Description : fetch train details
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 import React, { useState, useEffect } from 'react';
 import "./TrainList.css"
-import "../Shedule train/TrainSheduls.css"
+
 const TrainList = () => {
 
   const [response, setResponse] = useState([]);
@@ -30,7 +36,8 @@ const TrainList = () => {
     <div>
         <div className="table-container">
       <h2>Trains of Srilanka</h2>
-      <table>
+      <div className='sug_table'>
+      <table >
         <thead>
           <tr>
            
@@ -72,6 +79,7 @@ const TrainList = () => {
   ))}
 </tbody>
       </table>
+      </div>
       </div>  
     </div>
   )
