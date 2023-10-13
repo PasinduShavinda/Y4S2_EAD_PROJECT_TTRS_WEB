@@ -3,7 +3,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { useNavigate } from 'react-router-dom';
 import Train from "../../../assets/train1.jpeg"
-import Train from "../../../assets/train1.png"
+
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
