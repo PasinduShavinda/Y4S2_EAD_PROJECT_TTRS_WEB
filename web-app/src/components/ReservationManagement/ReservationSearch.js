@@ -70,7 +70,7 @@ const ReservationSearch = () => {
 
     try {
       const formattedDate = formatDateForApi(date);
-      const apiUrl = `https://localhost:7084/api/Schedule/FilterSchedules?date=${formattedDate}&station1=${from}&station2=${to}`;
+      const apiUrl = `http://localhost:5239/api/Schedule/FilterSchedules?date=${formattedDate}&station1=${from}&station2=${to}`;
       const response = await fetch(apiUrl);
       const data = await response.json();
       setScheduleData(data);
@@ -117,10 +117,10 @@ const ReservationSearch = () => {
       date:selectedRow.date
     };
 
-    await axios.post('https://localhost:7084/api/Reservation',reservation);
+    await axios.post('http://localhost:5239/api/Reservation',reservation);
     
    
-    await axios.put(`https://localhost:7084/api/Schedule/${selectedRow.id}`,schedule);
+    await axios.put(`http://localhost:5239/api/Schedule/${selectedRow.id}`,schedule);
     window.location.reload();
 
     setShowBookingForm(false);

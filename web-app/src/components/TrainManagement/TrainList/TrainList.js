@@ -11,7 +11,7 @@ const TrainList = () => {
         // Fetch data from the API with no parameters
         const fetchData = async () => {
           try {
-            const response = await fetch('https://localhost:7084/api/Train');
+            const response = await fetch('http://localhost:5239/api/Train');
             if (response.ok) {
               const data = await response.json();
               setTableData(data);

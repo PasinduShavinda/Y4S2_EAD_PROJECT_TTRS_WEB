@@ -11,7 +11,7 @@ const ReservaionListforUser = () => {
         // Fetch data from the API with no parameters
         const fetchData = async () => {
           try {
-            const response = await fetch(`https://localhost:7084/api/Reservation/byUserId/${userId}`);
+            const response = await fetch(`http://localhost:5239/api/Reservation/byUserId/${userId}`);
             if (response.ok) {
               const data = await response.json();
               setTableData(data);
@@ -27,7 +27,7 @@ const ReservaionListforUser = () => {
       }, []);
       const handleDelete = async (id) => {
         try {
-          await axios.delete(`https://localhost:7084/api/Reservation/${id}`);
+          await axios.delete(`http://localhost:5239/api/Reservation/${id}`);
           window.location.reload();
         } catch (error) {
           console.error('Error deleting schedule:', error);
