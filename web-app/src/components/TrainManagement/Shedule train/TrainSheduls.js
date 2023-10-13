@@ -21,7 +21,7 @@ const TrainSheduls = () => {
   useEffect(() => {
     const fetchHandler = async () => {
       await axios
-        .get(`https://localhost:7084/api/Train/${id}`)
+        .get(`http://localhost:5239/api/Train/${id}`)
         .then((res) => setInputs(res.data));
     };
 
@@ -47,7 +47,7 @@ const TrainSheduls = () => {
       
     };
 
-    await axios.post('https://localhost:7084/api/Schedule', schedule);
+    await axios.post('http://localhost:5239/api/Schedule', schedule);
     window.location.reload();
    
   };
@@ -57,7 +57,7 @@ const TrainSheduls = () => {
       // Fetch data from the API with no parameters
       const fetchData = async () => {
         try {
-          const response = await fetch(`https://localhost:7084/api/Schedule/GetByTrainId/${inputs.trainId}`);
+          const response = await fetch(`http://localhost:5239/api/Schedule/GetByTrainId/${inputs.trainId}`);
           if (response.ok) {
             const data = await response.json();
             setTableData(data);
@@ -74,7 +74,7 @@ const TrainSheduls = () => {
 
     const handleDelete = async (id) => {
         try {
-          await axios.delete(`https://localhost:7084/api/Schedule/${id}`);
+          await axios.delete(`http://localhost:5239/api/Schedule/${id}`);
           window.location.reload();
         } catch (error) {
           console.error('Error deleting schedule:', error);

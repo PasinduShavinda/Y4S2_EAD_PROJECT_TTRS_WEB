@@ -181,7 +181,7 @@ const handleSubmit = async (e) => {
 
     const updatedFormData = { ...formData, stopStations: selectedStationsArray };
 
-    const response = await fetch('https://localhost:7084/api/Train', {
+    const response = await fetch('http://localhost:5239/api/Train', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
