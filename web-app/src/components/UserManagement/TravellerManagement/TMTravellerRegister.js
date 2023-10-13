@@ -1,9 +1,17 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+// FileName: TMTravellerRegister.js
+// FileType: JavaScript File
+// Author: IT20140298 Shavinda W.A.P
+// Description: Traveller Registration page
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
 
 const TMTravellerRegister = () => {
 
+    // State variables for managing form inputs
     const [nic, setNic] = useState("");
     const [email, setEmail] = useState("");
     const [username, setUserName] = useState("");
@@ -14,7 +22,7 @@ const TMTravellerRegister = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    const navigate = useNavigate();
+    const navigate = useNavigate();// Initialize routing function
 
     // const IsValidate = () => {
     //     let isproceed = true;
@@ -49,16 +57,19 @@ const TMTravellerRegister = () => {
     //     return isproceed;
     // }
 
-
+    // Function to handle form submission and traveler registration
     const handlesubmit = (e) => {
         e.preventDefault();
+        // Create a traveler registration object with form input values
         let trRegObj = { nic, email, username, fullName, password, confirmPassword, role };
         console.log(trRegObj);
-        fetch("https://localhost:7084/api/v1/authenticate/register", {
+        // Send a POST request to the server for traveler registration
+        fetch("http://localhost:5239/api/v1/authenticate/register", {
             method: "POST",
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(trRegObj)
         }).then((res) => {
+            // Display a success message and navigate to the login page
             swal("Successful!", "Registration Successful ✅ 👏", "success");
             navigate('/login');
         }).catch((err) => {

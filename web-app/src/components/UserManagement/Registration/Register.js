@@ -1,9 +1,17 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+// FileName: Register.js
+// FileType: JavaScript File
+// Author: IT20140298 Shavinda W.A.P
+// Description: Registration page
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
 
 const Register = () => {
 
+    // State variables for managing form inputs
     const [email, setEmail] = useState("");
     const [username, setUserName] = useState("");
     const [fullName, setFullName] = useState("");
@@ -47,12 +55,12 @@ const Register = () => {
     //     return isproceed;
     // }
 
-
+    // Function to handle form submission and user registration
     const handlesubmit = (e) => {
         e.preventDefault();
         let regobj = { email, username, fullName, password, confirmPassword, role };
         console.log(regobj);
-        fetch("https://localhost:7084/api/v1/authenticate/register", {
+        fetch("http://localhost:5239/api/v1/authenticate/register", {
             method: "POST",
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(regobj)

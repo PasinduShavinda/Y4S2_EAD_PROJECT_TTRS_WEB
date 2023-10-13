@@ -1,15 +1,24 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+// FileName: TMViewRegisteredAcc.js
+// FileType: JavaScript File
+// Author: IT20140298 Shavinda W.A.P
+// Description: View Registered Traveller Accounts 
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ActiveBtn from "../../../assets/active.png"
 import InactiveBtn from "../../../assets/inactive.png"
+import Notify from "../../../assets/notify.png"
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const TMViewRegisteredAcc = () => {
-
+    
+    // State variables for managing component state
     const [regTravellers, setRegTravllers] = useState([]);
 
     const [show, setShow] = useState(false);
@@ -37,6 +46,7 @@ const TMViewRegisteredAcc = () => {
     const Token = sessionStorage.getItem('accessToken');
     const UserRole = sessionStorage.getItem('role');
 
+    // Function to handle the closing of modal
     const handleClose = () => {
         setShow(false);
         setShowProfile(false);
@@ -47,13 +57,14 @@ const TMViewRegisteredAcc = () => {
 
     const navigate = useNavigate();
 
+    // UseEffect hook to load registered travelers when the component mounts
     useEffect(() => {
         LoadRegTravellers();
     }, []);
 
     // Retrieving All Travellers
     const LoadRegTravellers = () => {
-        fetch("https://localhost:7084/api/v1/regtravellers/view", {
+        fetch("http://localhost:5239/api/v1/regtravellers/view", {
             headers: {
                 'Authorization': 'bearer ' + Token
             }
@@ -73,7 +84,7 @@ const TMViewRegisteredAcc = () => {
     // Function to deactivate a user
     const handleDeactivate = async (nic) => {
         try {
-            const response = await fetch(`https://localhost:7084/api/v1/traveller/account/deactivate/${nic}`, {
+            const response = await fetch(`http://localhost:5239/api/v1/traveller/account/deactivate/${nic}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -96,7 +107,7 @@ const TMViewRegisteredAcc = () => {
     // Function to deactivate a user
     const handleActivate = async (nic) => {
         try {
-            const response = await fetch(`https://localhost:7084/api/v1/traveller/account/activate/${nic}`, {
+            const response = await fetch(`http://localhost:5239/api/v1/traveller/account/activate/${nic}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -120,7 +131,7 @@ const TMViewRegisteredAcc = () => {
     const handleCreateForm = async (nic) => {
         setIsEdit(false);
         handleShow();
-        fetch(`https://localhost:7084/api/v1/regtravellers/view/${nic}`, {
+        fetch(`http://localhost:5239/api/v1/regtravellers/view/${nic}`, {
             headers: {
                 'Authorization': 'bearer ' + Token
             }
@@ -149,7 +160,7 @@ const TMViewRegisteredAcc = () => {
     const handleUpdateForm = async (nic) => {
         setIsEdit(true);
         handleShow();
-        fetch(`https://localhost:7084/api/v1/traveller/view/${nic}`, {
+        fetch(`http://localhost:5239/api/v1/traveller/view/${nic}`, {
             headers: {
                 'Authorization': 'bearer ' + Token
             }
@@ -189,7 +200,7 @@ const TMViewRegisteredAcc = () => {
     const handleViewProfile = async (nic) => {
 
         handleShowProfile();
-        fetch(`https://localhost:7084/api/v1/traveller/view/${nic}`, {
+        fetch(`http://localhost:5239/api/v1/traveller/view/${nic}`, {
             headers: {
                 method:'GET',
                 'Authorization': 'bearer ' + Token
@@ -228,30 +239,37 @@ const TMViewRegisteredAcc = () => {
 
     const handleSave = (e) => {
         e.preventDefault();
+        // Create a profile object with data
         let ProfileObj = { fullName, userName, gender, dob, nationality, contactNumber, email, address, nic, passportNumber, prefferedLanguage, emergencyContactName, relationshipToTraveller, emergencyContactNumber };
         console.log(ProfileObj);
-        fetch("https://localhost:7084/api/v1/traveller/save", {
+        // Send a POST request to save the profile
+        fetch("http://localhost:5239/api/v1/traveller/save", {
             method: "POST",
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(ProfileObj)
         }).then((res) => {
+            // Handle success: close the form, show a success message, and navigate to a new page
             handleClose();
             swal("Successful!", "Traveller Profile Successfully Created ✅ 👏", "success");
             navigate('/TMViewTravellerAccs');
         }).catch((err) => {
+            // Handle any errors by logging them
             console.log(err);
         });
     }
 
     const handleUpdate = (e) => {
         e.preventDefault();
+        // Create an update object with data
         let updObj = { fullName, userName, gender, dob, nationality, contactNumber, email, address, nic, passportNumber, prefferedLanguage, emergencyContactName, relationshipToTraveller, emergencyContactNumber };
-        fetch(`https://localhost:7084/api/v1/traveller/update/${editId}`, {
+        // Send a PUT request to update the profile with a specific ID
+        fetch(`http://localhost:5239/api/v1/traveller/update/${editId}`, {
             method: "PUT",
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(updObj)
         })
             .then((res) => {
+                // Handle success: close the form, show a success message, and navigate to a new page
                 handleClose();
                 swal("Successful!", "Traveller Profile Successfully Updated ✅ 👏", "success");
                 navigate('/TMViewTravellerAccs');
@@ -262,7 +280,7 @@ const TMViewRegisteredAcc = () => {
     }
 
     const handleDeleteProfile = (nic) => {
-        // Show a confirmation dialog
+        // Show a confirmation dialog before proceeding with the deletion
         swal({
           title: 'Are you sure?',
           text: 'Once deleted, you will not be able to recover this profile!',
@@ -271,8 +289,8 @@ const TMViewRegisteredAcc = () => {
           dangerMode: true,
         }).then((willDelete) => {
           if (willDelete) {
-
-            fetch(`https://localhost:7084/api/v1/traveller/delete/${nic}`, {
+            // Send a DELETE request to delete the profile with a specific NIC
+            fetch(`http://localhost:5239/api/v1/traveller/delete/${nic}`, {
               method: 'DELETE',
               headers: {
                 'Authorization': 'bearer ' + Token,
@@ -302,7 +320,7 @@ const TMViewRegisteredAcc = () => {
                 </div>
                 <Link to="/TMRegTraveller">
                     {UserRole !== 'Back Officer' && (
-                        <button className="btn btn-success" style={{ marginLeft: '940px', marginTop: '10px' }}>
+                        <button className="btn btn-success" style={{ marginLeft: '1100px', marginTop: '10px' }}>
                             Create Account
                         </button>
                     )}
@@ -333,7 +351,11 @@ const TMViewRegisteredAcc = () => {
                                         <td><center>{item.nic}</center></td>
                                         <td><center>{item.fullName}</center></td>
                                         <td><center>{item.userName}</center></td>
-                                        <td><center>{item.email}</center></td>
+                                        <td><center>{item.email}&nbsp;{item.isRequestSent ? (
+                                                    <img src={Notify} width="25" />
+                                                ) : (
+                                                    <p></p>
+                                                )} </center></td>
                                         <center>
                                             <td>
                                                 {item.isActive ? (
@@ -360,16 +382,16 @@ const TMViewRegisteredAcc = () => {
 
                                         <td>
                                             <center>
-                                                <button className="btn btn-info" disabled={UserRole === 'BackOfficer'} onClick={() => handleCreateForm(item.nic)}>
+                                                <button className="btn btn-info" disabled={UserRole === 'Back Officer'} onClick={() => handleCreateForm(item.nic)}>
                                                     Create
                                                 </button> &nbsp;
-                                                <button className="btn btn-success" disabled={UserRole === 'BackOfficer'} onClick={() => handleUpdateForm(item.nic)}>
+                                                <button className="btn btn-success" disabled={UserRole === 'Back Officer'} onClick={() => handleUpdateForm(item.nic)}>
                                                     Update
                                                 </button> &nbsp;
-                                                <button className="btn btn-dark" disabled={UserRole === 'BackOfficer'} onClick={() => handleViewProfile(item.nic)}>
+                                                <button className="btn btn-dark" disabled={UserRole === 'Back Officer'} onClick={() => handleViewProfile(item.nic)}>
                                                     View
                                                 </button> &nbsp;
-                                                <button className="btn btn-danger" disabled={UserRole === 'BackOfficer'} onClick={() => handleDeleteProfile(item.nic)}>
+                                                <button className="btn btn-danger" disabled={UserRole === 'Back Officer'} onClick={() => handleDeleteProfile(item.nic)}>
                                                     Delete
                                                 </button>
                                             </center>

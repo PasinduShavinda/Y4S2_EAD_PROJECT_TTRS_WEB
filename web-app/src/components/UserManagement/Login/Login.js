@@ -1,25 +1,37 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+// FileName: Login.js
+// FileType: JavaScript File
+// Author: IT20140298 Shavinda W.A.P
+// Description: Login
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
 
 const Login = () => {
+    // State variables to manage email and password
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const usenavigate = useNavigate();
 
+    // useEffect to clear session storage when the component loads
     useEffect(() => {
         sessionStorage.clear();
     }, []);
 
+    // Function to handle the login process when the form is submitted
     const ProceedLogin = (e) => {
         e.preventDefault();
         if (validate()) {
+          // Prepare the login object with email and password
           let loginObject = {
             "email": email,
             "password": password
           };
-          fetch("https://localhost:7084/api/v1/authenticate/login", {
+          // Send a POST request to the server for authentication
+          fetch("http://localhost:5239/api/v1/authenticate/login", {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(loginObject)
@@ -27,9 +39,11 @@ const Login = () => {
             return res.json();
           }).then((resp) => {
             console.log(resp)
+            // Check if the response is empty (failed login) or has data (successful login)
             if (Object.keys(resp).length === 0) {
               swal("Login Failed!", "Invalid Credentials ❌ 🚫 ", "error");
             } else {
+              // Display a success message and store user data in session storage
               swal("Successful!", "Login Successful ✅ 👏", "success");
               sessionStorage.setItem('email', resp.email);
               sessionStorage.setItem('role', resp.role);
@@ -37,9 +51,9 @@ const Login = () => {
       
               // Check the user's role and navigate accordingly
               if (resp.role === 'Travel Agent') {
-                usenavigate('/TMHome');
+                usenavigate('/TMViewTravellerAccs');
               } else if (resp.role === 'Back Officer') {
-                usenavigate('/TMactiveDeactiveProfiles');
+                usenavigate('/TMViewTravellerAccs');
               } else {
                 // Handle other roles or navigate to a default route
                 usenavigate('/');
@@ -50,7 +64,7 @@ const Login = () => {
           });
         }
       }
-      
+    // Function to validate email and password
     const validate = () => {
         let result = true;
         if (email === '' || email === null) {
