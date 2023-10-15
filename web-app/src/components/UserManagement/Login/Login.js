@@ -51,12 +51,12 @@ const Login = () => {
       
               // Check the user's role and navigate accordingly
               if (resp.role === 'Travel Agent') {
-                usenavigate('/TMViewTravellerAccs');
+                usenavigate('/TravelAgentMainPage');
               } else if (resp.role === 'Back Officer') {
-                usenavigate('/TMViewTravellerAccs');
+                usenavigate('/BackOfficerMainPage');
               } else {
                 // Handle other roles or navigate to a default route
-                usenavigate('/');
+                usenavigate('/login');
               }
             }
           }).catch((err) => {

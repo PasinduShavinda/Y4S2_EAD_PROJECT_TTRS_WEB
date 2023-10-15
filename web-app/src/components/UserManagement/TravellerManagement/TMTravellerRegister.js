@@ -71,7 +71,7 @@ const TMTravellerRegister = () => {
         }).then((res) => {
             // Display a success message and navigate to the login page
             swal("Successful!", "Registration Successful ✅ 👏", "success");
-            navigate('/login');
+            navigate('/TMViewTravellerAccs');
         }).catch((err) => {
             console.log(err);
         });

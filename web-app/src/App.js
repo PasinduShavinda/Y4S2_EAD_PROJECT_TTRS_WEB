@@ -20,6 +20,9 @@ import TrainSheduls from "./components/TrainManagement/Shedule train/TrainShedul
 import ReservationSearch from "./components/ReservationManagement/ReservationSearch"
 import ReservaionListforUser from "./components/ReservationManagement/ReservaionListforUser/ReservaionListforUser"
 
+import BackOfficerMain from "./components/MainComponent/BackOfficerMain";
+import TravelAgentMain from "./components/MainComponent/TravelAgentMain";
+
 function App() {
   return (
     <div className="App">
@@ -52,6 +55,9 @@ function App() {
         
         {/* Traveller Management Routes - Back Officer */}
         <Route path='/TMactiveDeactiveProfiles' element={<TMActiveDetactiveProfiles/>}></Route>
+
+        <Route path='/BackOfficerMainPage' element={<BackOfficerMain/>}></Route>
+        <Route path='/TravelAgentMainPage' element={<TravelAgentMain/>}></Route>
 
       </Routes>
       </BrowserRouter>
