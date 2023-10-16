@@ -7,28 +7,19 @@ const Homepage = () => {
       <div class="hero_area">
         {/* <!-- header section strats --> */}
         <header class="header_section">
+
           <div class="container-fluid">
             <nav class="navbar navbar-expand-lg custom_nav-container">
-              <a class="navbar-brand" href="index.html">
-                <span>
-                  Sri Lanka Railways
-                </span>
-              </a>
-
+              <h1 style={{ color: 'yellow' }}>
+                Sri Lanka Railways
+              </h1>
               <div class="navbar-collapse" id="">
-                <div class="user_option">
+                <div style={{ marginLeft: '810px' }}>
                   <Link to="/login">
-                    <button className="btn btn-success">
+                    <button className="btn btn-danger">
                       Login
                     </button>
                   </Link>
-                </div>
-                <div class="custom_menu-btn">
-                  <button onclick="openNav()">
-                    <span class="s-1"> </span>
-                    <span class="s-2"> </span>
-                    <span class="s-3"> </span>
-                  </button>
                 </div>
                 <div id="myNav" class="overlay">
                   <div class="overlay-content">
@@ -348,61 +339,16 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* <!-- end blog section -->
-
-  
-
-  {/* <!-- end us section -->
-
-  <!-- client section --> */}
-
-
-
-
 
       <section class="contact_section layout_padding">
         <div class="container">
-          <div class="heading_container">
-            <h2>
-              Request A call back
-            </h2>
-          </div>
-          <div class="row">
-            <div class="col-md-8 mx-auto">
-              <div class="form_container">
-                <form>
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <input type="text" class="form-control" id="inputName4" placeholder="Name " />
-                    </div>
-                    <div class="form-group col-md-6">
-                      <input type="text" class="form-control" id="inputSubject4" placeholder="Phone" />
-                    </div>
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col">
-                      <input type="email" class="form-control" id="inputEmail4" placeholder="Email id" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="inputMessage" placeholder="Message" />
-                  </div>
-                  <div class="d-flex justify-content-center">
-                    <button type="submit" class="">Send</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
           <div class="contact_items">
-
             <a href="">
               <div class="img-box">
                 <img src="images/location.png" alt="" />
               </div>
               <h6>
-                Loram Ipusum ari
-                lo elisant na
+                5th Lane, Colombo 07
               </h6>
             </a>
             <a href="">
@@ -410,7 +356,7 @@ const Homepage = () => {
                 <img src="images/call.png" alt="" />
               </div>
               <h6>
-                (+12 1234456789)
+                (0112677876)
               </h6>
             </a>
             <a href="">
@@ -418,7 +364,7 @@ const Homepage = () => {
                 <img src="images/mail.png" alt="" />
               </div>
               <h6>
-                demo@gmail.com
+                slrailway@yahoo.com
               </h6>
             </a>
 
@@ -449,18 +395,6 @@ const Homepage = () => {
           </div>
         </div>
       </section>
-
-      {/* <!-- end contact section -->
-
-  <!-- map section --> */}
-
-
-
-
-      {/* <!-- end map section -->
-
-  <!-- footer section --> */}
-
     </div>
   )
 }

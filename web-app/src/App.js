@@ -10,7 +10,7 @@ import TMViewProfiles from './components/UserManagement/TravellerManagement/TMVi
 import TMActiveDetactiveProfiles from './components/UserManagement/TravellerManagement/TMActiveDeactiveProfile';
 import TMTravellerRegister from './components/UserManagement/TravellerManagement/TMTravellerRegister';
 import TMViewRegisteredAcc from './components/UserManagement/TravellerManagement/TMViewRegisteredAcc';
-import Navbar from './components/Common/NavBar/Navbar';
+// import Navbar from './components/Common/NavBar/Navbar';
 
 import Homepage from "./components/HomePage/Homepage";
 import TrainList from "./components/TrainManagement/TrainList/TrainList";
@@ -27,7 +27,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <Navbar/>
+      {/* <Navbar/> */}
       <Routes>
 
         <Route path="/" element={< Homepage />} exact />

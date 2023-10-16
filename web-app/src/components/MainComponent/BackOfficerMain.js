@@ -6,6 +6,8 @@ import Box from "@mui/material/Box";
 import TMViewRegisteredAcc from "../UserManagement/TravellerManagement/TMViewRegisteredAcc";
 import CreateTrain from "../TrainManagement/CreateTrain/CreateTrain";
 import TrainList from "../TrainManagement/TrainList/TrainList";
+import Navbar from "../Common/NavBar/Navbar";
+import Footer from "../Common/Footer/Footer";
 
 const BackOfficerMain = () => {
     const [value, setValue] = React.useState("one");
@@ -16,6 +18,8 @@ const BackOfficerMain = () => {
 
   return (
     <div>
+    <div>
+      <Navbar/>
       <div
         style={{
           display: "flex",
@@ -38,6 +42,8 @@ const BackOfficerMain = () => {
         </Box>
       </div>
       {value === "one" && <TMViewRegisteredAcc /> || value === "two" && <CreateTrain/> || value === "three" && <TrainList/> }
+    </div>
+    <Footer/>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import TMViewRegisteredAcc from "../UserManagement/TravellerManagement/TMViewRegisteredAcc";
 import ReservationSearch from "../ReservationManagement/ReservationSearch";
 import ReservaionListforUser from "../ReservationManagement/ReservaionListforUser/ReservaionListforUser";
+import Navbar from "../Common/NavBar/Navbar";
 
 const TravelAgentMain = () => {
     const [value, setValue] = React.useState("one");
@@ -16,6 +17,7 @@ const TravelAgentMain = () => {
   
     return (
       <div>
+        <Navbar/>
         <div
           style={{
             display: "flex",

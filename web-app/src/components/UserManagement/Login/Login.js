@@ -8,6 +8,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
+import Footer from "../../Common/Footer/Footer";
 
 const Login = () => {
     // State variables to manage email and password
@@ -78,6 +79,7 @@ const Login = () => {
         return result;
     }
     return (
+      <div>
         <div className="row">
             <div className="offset-lg-3 col-lg-6" style={{ marginTop: '100px' }}>
                 <form onSubmit={ProceedLogin} className="container">
@@ -104,6 +106,8 @@ const Login = () => {
                 </form>
             </div>
         </div>
+        <Footer/>
+      </div>
     );
 }
 
