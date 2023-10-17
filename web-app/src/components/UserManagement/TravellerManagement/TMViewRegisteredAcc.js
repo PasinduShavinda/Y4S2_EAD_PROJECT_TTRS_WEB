@@ -154,8 +154,6 @@ const TMViewRegisteredAcc = () => {
 
     // Get data to the create profile form
     const handleCreateForm = async (nic) => {
-        setIsEdit(false);
-        handleShow();
         fetch(`http://localhost:5239/api/v1/regtravellers/view/${nic}`, {
             headers: {
                 'Authorization': 'bearer ' + Token
@@ -172,7 +170,11 @@ const TMViewRegisteredAcc = () => {
                 return res.json();
             })
             .then(res => {
-                if (res) {
+                if (res.isProfileCreated) {
+                    swal("Profile Already Created", "The profile is already created for this traveler.", "info");
+                } else {
+                    setIsEdit(false);
+                    handleShow();
                     setNic(res.nic);
                     setEmail(res.email);
                     setUserName(res.userName);
@@ -181,11 +183,10 @@ const TMViewRegisteredAcc = () => {
             });
     }
 
-    // Get data to the create profile form
+    // Get data to the update form
     const handleUpdateForm = async (nic) => {
-        setIsEdit(true);
-        handleShow();
-        fetch(`http://localhost:5239/api/v1/traveller/view/${nic}`, {
+        // Fetch the isProfileCreated flag from the /regtravellers/view endpoint
+        fetch(`http://localhost:5239/api/v1/regtravellers/view/${nic}`, {
             headers: {
                 'Authorization': 'bearer ' + Token
             }
@@ -200,34 +201,59 @@ const TMViewRegisteredAcc = () => {
                 }
                 return res.json();
             })
-            .then(res => {
-                if (res) {
-                    setNic(res.nic);
-                    setEmail(res.email);
-                    setUserName(res.userName);
-                    setFullName(res.fullName);
-                    setAddress(res.address);
-                    setContact(res.contactNumber);
-                    setDob(res.dob);
-                    setNat(res.nationality);
-                    setPassport(res.passportNumber);
-                    setLang(res.prefferedLanguage);
-                    setEmcont(res.emergencyContactNumber);
-                    setRelt(res.relationshipToTraveller);
-                    setEmName(res.emergencyContactName);
-                    setGender(res.gender);
-                    setEditId(res.nic);
+            .then(regTravellerData => {
+                if (regTravellerData && !regTravellerData.isProfileCreated) {
+                    swal("Profile Not Created", "The user has not created a profile.", "info");
+                } else {
+                    // If isProfileCreated is true, proceed to fetch the data for the update form
+                    setIsEdit(true);
+                    handleShow();
+                    fetch(`http://localhost:5239/api/v1/traveller/view/${nic}`, {
+                        headers: {
+                            'Authorization': 'bearer ' + Token
+                        }
+                    })
+                        .then(res => {
+                            if (res.status === 401) {
+                                swal("Unauthorized!", "Access Denied 🚫 ", "error");
+                                return null;
+                            }
+                            else if (!res.ok) {
+                                return false;
+                            }
+                            return res.json();
+                        })
+                        .then(res => {
+                            if (res) {
+                                // Set the profile data as you normally do
+                                setNic(res.nic);
+                                setEmail(res.email);
+                                setUserName(res.userName);
+                                setFullName(res.fullName);
+                                setAddress(res.address);
+                                setContact(res.contactNumber);
+                                setDob(res.dob);
+                                setNat(res.nationality);
+                                setPassport(res.passportNumber);
+                                setLang(res.prefferedLanguage);
+                                setEmcont(res.emergencyContactNumber);
+                                setRelt(res.relationshipToTraveller);
+                                setEmName(res.emergencyContactName);
+                                setGender(res.gender);
+                                setEditId(res.nic);
+                            }
+                        });
                 }
             });
     }
+
+
 
     // Get data to the profile form
     const handleViewProfile = async (nic) => {
-
-        handleShowProfile();
-        fetch(`http://localhost:5239/api/v1/traveller/view/${nic}`, {
+        // Fetch user data from regtravellers to check if isProfileCreated is false
+        fetch(`http://localhost:5239/api/v1/regtravellers/view/${nic}`, {
             headers: {
-                method: 'GET',
                 'Authorization': 'bearer ' + Token
             }
         })
@@ -235,53 +261,90 @@ const TMViewRegisteredAcc = () => {
                 if (res.status === 401) {
                     swal("Unauthorized!", "Access Denied 🚫 ", "error");
                     return null;
-                }
-                else if (!res.ok) {
+                } else if (!res.ok) {
                     return false;
                 }
                 return res.json();
             })
             .then(res => {
-                if (res) {
-                    setNic(res.nic);
-                    setEmail(res.email);
-                    setUserName(res.userName);
-                    setFullName(res.fullName);
-                    setAddress(res.address);
-                    setContact(res.contactNumber);
-                    setDob(res.dob);
-                    setNat(res.nationality);
-                    setPassport(res.passportNumber);
-                    setLang(res.prefferedLanguage);
-                    setEmcont(res.emergencyContactNumber);
-                    setRelt(res.relationshipToTraveller);
-                    setEmName(res.emergencyContactName);
-                    setGender(res.gender);
-                    setEditId(res.nic);
+                if (res && res.isProfileCreated === false) {
+                    swal("Profile Not Created", "The user has not created a profile.", "info");
+                } else {
+                    // Continue fetching the user profile data
+                    handleShowProfile();
+                    fetch(`http://localhost:5239/api/v1/traveller/view/${nic}`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'bearer ' + Token
+                        }
+                    })
+                        .then(res => {
+                            if (res.status === 401) {
+                                swal("Unauthorized!", "Access Denied 🚫 ", "error");
+                                return null;
+                            } else if (!res.ok) {
+                                return false;
+                            }
+                            return res.json();
+                        })
+                        .then(res => {
+                            if (res) {
+                                setNic(res.nic);
+                                setEmail(res.email);
+                                setUserName(res.userName);
+                                setFullName(res.fullName);
+                                setAddress(res.address);
+                                setContact(res.contactNumber);
+                                setDob(res.dob);
+                                setNat(res.nationality);
+                                setPassport(res.passportNumber);
+                                setLang(res.prefferedLanguage);
+                                setEmcont(res.emergencyContactNumber);
+                                setRelt(res.relationshipToTraveller);
+                                setEmName(res.emergencyContactName);
+                                setGender(res.gender);
+                                setEditId(res.nic);
+                            }
+                        });
                 }
             });
     }
 
     const handleSave = (e) => {
         e.preventDefault();
+
         // Create a profile object with data
         let ProfileObj = { fullName, userName, gender, dob, nationality, contactNumber, email, address, nic, passportNumber, prefferedLanguage, emergencyContactName, relationshipToTraveller, emergencyContactNumber };
         console.log(ProfileObj);
+
         // Send a POST request to save the profile
         fetch("http://localhost:5239/api/v1/traveller/save", {
             method: "POST",
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(ProfileObj)
-        }).then((res) => {
-            // Handle success: close the form, show a success message, and navigate to a new page
-            handleClose();
-            swal("Successful!", "Traveller Profile Successfully Created ✅ 👏", "success");
-            navigate('/TMViewTravellerAccs');
-        }).catch((err) => {
-            // Handle any errors by logging them
-            console.log(err);
-        });
-    }
+        })
+            .then(async (res) => {
+                if (res.ok) {
+                    // Handle success: close the form, show a success message, and navigate to a new page
+                    handleClose();
+                    swal("Successful!", "Traveller Profile Successfully Created ✅ 👏", "success");
+                    navigate('/TMViewTravellerAccs');
+
+                    // Call the API to set the profile created state
+                    await fetch(`http://localhost:5239/api/v1/regtravellers/setprofile/${nic}`, {
+                        method: 'PUT',
+                        headers: { 'content-type': 'application/json' },
+                    });
+                } else {
+                    // Handle any errors by logging them
+                    console.log("Response is not OK");
+                }
+            })
+            .catch((err) => {
+                // Handle any errors by logging them
+                console.log(err);
+            });
+    };
 
     const handleUpdate = (e) => {
         e.preventDefault();
@@ -304,35 +367,122 @@ const TMViewRegisteredAcc = () => {
             });
     }
 
+    // const handleDeleteProfile = (nic) => {
+    //     // Fetch user data from regtravellers to check if isProfileCreated is false
+    //     fetch(`http://localhost:5239/api/v1/regtravellers/view/${nic}`, {
+    //         headers: {
+    //             'Authorization': 'bearer ' + Token
+    //         }
+    //     })
+    //         .then(res => {
+    //             if (res.status === 401) {
+    //                 swal("Unauthorized!", "Access Denied 🚫 ", "error");
+    //                 return null;
+    //             } else if (!res.ok) {
+    //                 return false;
+    //             }
+    //             return res.json();
+    //         })
+    //         .then(res => {
+    //             if (res && res.isProfileCreated === false) {
+    //                 swal("Profile Not Created", "The user has not created a profile.", "info");
+    //             } else {
+    //                 // Show a confirmation dialog before proceeding with the deletion
+    //                 swal({
+    //                     title: 'Are you sure?',
+    //                     text: 'Once deleted, you will not be able to recover this profile!',
+    //                     icon: 'warning',
+    //                     buttons: true,
+    //                     dangerMode: true,
+    //                 }).then((willDelete) => {
+    //                     if (willDelete) {
+    //                         // Send a DELETE request to delete the profile with a specific NIC
+    //                         fetch(`http://localhost:5239/api/v1/traveller/delete/${nic}`, {
+    //                             method: 'DELETE',
+    //                             headers: {
+    //                                 'Authorization': 'bearer ' + Token,
+    //                             },
+    //                         }).then((res) => {
+    //                             if (res.status === 401) {
+    //                                 swal('Unauthorized!', 'Access Denied 🚫', 'error');
+    //                                 return null;
+    //                             } else if (res.ok) {
+    //                                 swal('Success!', 'Profile has been deleted!', 'success');
+    //                             } else {
+    //                                 swal('Cancelled', 'The profile has not been deleted.', 'info');
+    //                             }
+    //                         });
+    //                     }
+    //                 });
+    //             }
+    //         });
+    // }
+
     const handleDeleteProfile = (nic) => {
-        // Show a confirmation dialog before proceeding with the deletion
-        swal({
-            title: 'Are you sure?',
-            text: 'Once deleted, you will not be able to recover this profile!',
-            icon: 'warning',
-            buttons: true,
-            dangerMode: true,
-        }).then((willDelete) => {
-            if (willDelete) {
-                // Send a DELETE request to delete the profile with a specific NIC
-                fetch(`http://localhost:5239/api/v1/traveller/delete/${nic}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Authorization': 'bearer ' + Token,
-                    },
-                }).then((res) => {
-                    if (res.status === 401) {
-                        swal('Unauthorized!', 'Access Denied 🚫', 'error');
-                        return null;
-                    } else if (res.ok) {
-                        swal('Success!', 'Profile has been deleted!', 'success');
-                    } else {
-                        swal('Cancelled', 'The profile has not been deleted.', 'info');
+        // Fetch user data from regtravellers to check if isProfileCreated is false
+        fetch(`http://localhost:5239/api/v1/regtravellers/view/${nic}`, {
+            headers: {
+                'Authorization': 'bearer ' + Token
+            }
+        })
+        .then(res => {
+            if (res.status === 401) {
+                swal("Unauthorized!", "Access Denied 🚫 ", "error");
+                return null;
+            } else if (!res.ok) {
+                return false;
+            }
+            return res.json();
+        })
+        .then(res => {
+            if (res && res.isProfileCreated === false) {
+                swal("Profile Not Created", "The user has not created a profile.", "info");
+            } else {
+                // Show a confirmation dialog before proceeding with the deletion
+                swal({
+                    title: 'Are you sure?',
+                    text: 'Once deleted, you will not be able to recover this profile!',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        // Send a DELETE request to delete the profile with a specific NIC
+                        fetch(`http://localhost:5239/api/v1/traveller/delete/${nic}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'Authorization': 'bearer ' + Token,
+                            },
+                        }).then((res) => {
+                            if (res.status === 401) {
+                                swal('Unauthorized!', 'Access Denied 🚫', 'error');
+                                return null;
+                            } else if (res.ok) {
+                                // After successful deletion, call the SetProfile2 endpoint
+                                fetch(`http://localhost:5239/api/v1/regtravellers/setprofile2/${nic}`, {
+                                    method: 'PUT',
+                                    headers: {
+                                        'Authorization': 'bearer ' + Token,
+                                    },
+                                })
+                                .then((setProfileRes) => {
+                                    if (setProfileRes.ok) {
+                                        swal('Success!', 'Profile has been deleted!', 'success');
+                                    } else {
+                                        swal('Error', 'Failed to update profile state!', 'error');
+                                    }
+                                });
+                            } else {
+                                swal('Cancelled', 'The profile has not been deleted.', 'info');
+                            }
+                        });
                     }
                 });
             }
         });
-    };
+    }
+    
+
 
 
 
