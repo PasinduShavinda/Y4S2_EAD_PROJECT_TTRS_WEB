@@ -369,11 +369,11 @@ const TMViewRegisteredAcc = () => {
                                         <td>
                                             <center>
                                                 {item.isActive ? (
-                                                    <button className="btn btn-warning" onClick={() => handleDeactivate(item.nic)}>
+                                                    <button className="btn btn-warning" disabled={UserRole === 'Travel Agent'} onClick={() => handleDeactivate(item.nic)}>
                                                         Deactivate
                                                     </button>
                                                 ) : (
-                                                    <button className="btn btn-primary" onClick={() => handleActivate(item.nic)}>
+                                                    <button className="btn btn-primary" disabled={UserRole === 'Travel Agent'} onClick={() => handleActivate(item.nic)}>
                                                         Activate
                                                     </button>
                                                 )}
