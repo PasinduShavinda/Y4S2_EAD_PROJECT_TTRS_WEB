@@ -17,7 +17,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const TMViewRegisteredAcc = () => {
-    
+
     // State variables for managing component state
     const [regTravellers, setRegTravllers] = useState([]);
 
@@ -83,48 +83,73 @@ const TMViewRegisteredAcc = () => {
     }
     // Function to deactivate a user
     const handleDeactivate = async (nic) => {
-        try {
-            const response = await fetch(`http://localhost:5239/api/v1/traveller/account/deactivate/${nic}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'bearer ' + Token
-                },
-            });
-            if (response.ok) {
-                window.location.reload();
-                swal("Successful!", "Account Deactivated ✅ ", "success");
-            } else if (response.status === 403) {
-                swal("Unaouthorized!", "Access Denied 🚫 ", "error");
+        swal({
+            title: 'Are you sure?',
+            text: 'Once deactivated, The travellers cannot access their accounts!',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        }).then(async (willDeactivate) => {
+            if (willDeactivate) {
+                try {
+                    const response = await fetch(`http://localhost:5239/api/v1/traveller/account/deactivate/${nic}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + Token, // 'Bearer' should be capitalized
+                        },
+                    });
+                    if (response.ok) {
+                        window.location.reload();
+                        swal("Successful!", "Account Deactivated ✅ ", "success");
+                    } else if (response.status === 403) {
+                        swal("Unauthorized!", "Access Denied 🚫 ", "error"); // Corrected the typo here
+                    } else {
+                        console.error('Error deactivating user:', response.statusText);
+                    }
+                } catch (error) {
+                    console.error('Error deactivating user:', error);
+                }
             } else {
-                console.error('Error deactivating user:', response.statusText);
+                swal('Cancelled', 'The profile has not been deactivated.', 'info');
             }
-        } catch (error) {
-            console.error('Error deactivating user:', error);
-        }
+        });
     };
+
 
     // Function to deactivate a user
     const handleActivate = async (nic) => {
-        try {
-            const response = await fetch(`http://localhost:5239/api/v1/traveller/account/activate/${nic}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'bearer ' + Token
-                },
-            });
-            if (response.ok) {
-                window.location.reload();
-                swal("Successful!", "Account Activated ✅ ", "success");
-            } else if (response.status == 403) {
-                swal("Unaouthorized!", "Access Denied 🚫 ", "error");
+        swal({
+            title: 'Are you sure?',
+            text: 'Once activated, The travellers can access their accounts!',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        }).then(async (willActivate) => {
+            if (willActivate) {
+                try {
+                    const response = await fetch(`http://localhost:5239/api/v1/traveller/account/activate/${nic}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'bearer ' + Token
+                        },
+                    });
+                    if (response.ok) {
+                        window.location.reload();
+                        swal("Successful!", "Account Activated ✅ ", "success");
+                    } else if (response.status == 403) {
+                        swal("Unaouthorized!", "Access Denied 🚫 ", "error");
+                    } else {
+                        console.error('Error deactivating user:', response.statusText);
+                    }
+                } catch (error) {
+                    console.error('Error deactivating user:', error);
+                }
             } else {
-                console.error('Error deactivating user:', response.statusText);
+                swal('Cancelled', 'The profile has not been Activated.', 'info');
             }
-        } catch (error) {
-            console.error('Error deactivating user:', error);
-        }
+        });
     };
 
     // Get data to the create profile form
@@ -202,7 +227,7 @@ const TMViewRegisteredAcc = () => {
         handleShowProfile();
         fetch(`http://localhost:5239/api/v1/traveller/view/${nic}`, {
             headers: {
-                method:'GET',
+                method: 'GET',
                 'Authorization': 'bearer ' + Token
             }
         })
@@ -282,35 +307,35 @@ const TMViewRegisteredAcc = () => {
     const handleDeleteProfile = (nic) => {
         // Show a confirmation dialog before proceeding with the deletion
         swal({
-          title: 'Are you sure?',
-          text: 'Once deleted, you will not be able to recover this profile!',
-          icon: 'warning',
-          buttons: true,
-          dangerMode: true,
+            title: 'Are you sure?',
+            text: 'Once deleted, you will not be able to recover this profile!',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
         }).then((willDelete) => {
-          if (willDelete) {
-            // Send a DELETE request to delete the profile with a specific NIC
-            fetch(`http://localhost:5239/api/v1/traveller/delete/${nic}`, {
-              method: 'DELETE',
-              headers: {
-                'Authorization': 'bearer ' + Token,
-              },
-            }).then((res) => {
-              if (res.status === 401) {
-                swal('Unauthorized!', 'Access Denied 🚫', 'error');
-                return null;
-              } else if (res.ok) {
-                swal('Success!', 'Profile has been deleted!', 'success');
-              } else {
-                swal('Cancelled', 'The profile has not been deleted.', 'info');
-              }
-            });
-          }
+            if (willDelete) {
+                // Send a DELETE request to delete the profile with a specific NIC
+                fetch(`http://localhost:5239/api/v1/traveller/delete/${nic}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': 'bearer ' + Token,
+                    },
+                }).then((res) => {
+                    if (res.status === 401) {
+                        swal('Unauthorized!', 'Access Denied 🚫', 'error');
+                        return null;
+                    } else if (res.ok) {
+                        swal('Success!', 'Profile has been deleted!', 'success');
+                    } else {
+                        swal('Cancelled', 'The profile has not been deleted.', 'info');
+                    }
+                });
+            }
         });
-      };
-      
+    };
 
-  
+
+
 
     return (
         <div className="container">
@@ -352,10 +377,10 @@ const TMViewRegisteredAcc = () => {
                                         <td><center>{item.fullName}</center></td>
                                         <td><center>{item.userName}</center></td>
                                         <td><center>{item.email}&nbsp;{item.isRequestSent ? (
-                                                    <img src={Notify} width="25" />
-                                                ) : (
-                                                    <p></p>
-                                                )} </center></td>
+                                            <img src={Notify} width="25" />
+                                        ) : (
+                                            <p></p>
+                                        )} </center></td>
                                         <center>
                                             <td>
                                                 {item.isActive ? (
