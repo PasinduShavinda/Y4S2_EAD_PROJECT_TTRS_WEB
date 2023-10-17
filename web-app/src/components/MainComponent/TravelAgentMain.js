@@ -7,6 +7,7 @@ import TMViewRegisteredAcc from "../UserManagement/TravellerManagement/TMViewReg
 import ReservationSearch from "../ReservationManagement/ReservationSearch";
 import ReservaionListforUser from "../ReservationManagement/ReservaionListforUser/ReservaionListforUser";
 import Navbar from "../Common/NavBar/Navbar";
+import Footer from "../Common/Footer/Footer";
 
 const TravelAgentMain = () => {
     const [value, setValue] = React.useState("one");
@@ -16,6 +17,7 @@ const TravelAgentMain = () => {
     };
   
     return (
+      <div>
       <div>
         <Navbar/>
         <div
@@ -40,6 +42,8 @@ const TravelAgentMain = () => {
           </Box>
         </div>
         {value === "one" && <TMViewRegisteredAcc /> || value === "two" && <ReservationSearch/> || value === "three" && <ReservaionListforUser/> }
+      </div>
+      <Footer/>
       </div>
     );
   }
