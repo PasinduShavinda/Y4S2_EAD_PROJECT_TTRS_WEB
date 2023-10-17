@@ -22,54 +22,79 @@ const Register = () => {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const navigate = useNavigate();
 
-    // const IsValidate = () => {
-    //     let isproceed = true;
-    //     let errormessage = 'Please enter the value in ';
-    //     if (id === null || id === '') {
-    //         isproceed = false;
-    //         errormessage += ' Username';
-    //     }
-    //     if (name === null || name === '') {
-    //         isproceed = false;
-    //         errormessage += ' Fullname';
-    //     }
-    //     if (password === null || password === '') {
-    //         isproceed = false;
-    //         errormessage += ' Password';
-    //     }
-    //     if (email === null || email === '') {
-    //         isproceed = false;
-    //         errormessage += ' Email';
-    //     }
+    // Function to validate email and password
+    const validate = () => {
 
-    //     if(!isproceed){
-    //         toast.warning(errormessage)
-    //     }else{
-    //         if(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)){
+        const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        const fullNameRegex = /^[A-Za-z ]*$/;
 
-    //         }else{
-    //             isproceed = false;
-    //             toast.warning('Please enter the valid email')
-    //         }
-    //     }
-    //     return isproceed;
-    // }
+
+        let result = true;
+        if (email === '' && username === '' && fullName === '' && password === '' && confirmPassword === '' && role === '') {
+            result = false;
+            swal("Registration Failed!", "You must fill all the fields ❗️❗️ ", "error");
+        }
+        else if (email === '' || email === null) {
+            result = false;
+            swal("Registration Failed!", "Email cannot be empty ❗️❗️ ", "error");
+        }
+        else if (username === '' || username === null) {
+            result = false;
+            swal("Registration Failed!", "User name cannot be empty ❗️❗️ ", "error");
+        }
+        else if (fullName === '' || fullName === null) {
+            result = false;
+            swal("Registration Failed!", "Full Name cannot be empty ❗️❗️ ", "error");
+        }
+        else if (password === '' || password === null) {
+            result = false;
+            swal("Registration Failed!", "Password cannot be empty ❗️❗️ ", "error");
+        }
+        else if (confirmPassword === '' || confirmPassword === null) {
+            result = false;
+            swal("Registration Failed!", "Confirm password cannot be empty ❗️❗️ ", "error");
+        }
+        else if (role === '' || role === null) {
+            result = false;
+            swal("Registration Failed!", "Role cannot be empty ❗️❗️ ", "error");
+        }
+        else if (!email.match(emailRegex)) {
+            result = false;
+            swal("Registration Failed!", "Please enter a valid email address ❗️❗️ ", "error");
+        }
+        else if (!password.match(passwordRegex)) {
+            result = false;
+            swal("Registration Failed!", "Please enter a strong password ❗️❗️ ", "error");
+        }
+        else if (password !== confirmPassword) {
+            result = false;
+            swal("Registration Failed!", "Passwords does not match ❗️❗️ ", "error");
+        }
+        else if (!fullName.match(fullNameRegex)) {
+            result = false;
+            swal("Registration Failed!", "Name cannot contain numbers ❗️❗️ ", "error");
+        }
+        return result;
+    }
 
     // Function to handle form submission and user registration
     const handlesubmit = (e) => {
         e.preventDefault();
-        let regobj = { email, username, fullName, password, confirmPassword, role };
-        console.log(regobj);
-        fetch("http://localhost:5239/api/v1/authenticate/register", {
-            method: "POST",
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(regobj)
-        }).then((res) => {
-            swal("Successful!", "Registration Successful ✅ 👏", "success");
-            navigate('/login');
-        }).catch((err) => {
-            console.log(err);
-        });
+        if (validate()) {
+            let regobj = { email, username, fullName, password, confirmPassword, role };
+            console.log(regobj);
+            fetch("http://localhost:5239/api/v1/authenticate/register", {
+                method: "POST",
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(regobj)
+            }).then((res) => {
+                swal("Successful!", "Registration Successful ✅ 👏", "success");
+                navigate('/login');
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
     }
 
     return (
