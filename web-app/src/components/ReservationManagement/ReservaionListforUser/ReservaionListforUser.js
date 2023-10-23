@@ -1,13 +1,6 @@
-/* 
-FileName: ReservaionListforUser.js
-FileType: Visual Code Source file
-Author: Kalansooriya S. H
-Description: This component filters reservations based on the user ID and displays them in a table. It also provides the ability to delete reservations.
-*/
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import Swal from 'sweetalert2'
 const ReservaionListforUser = () => {
    var userId = "test"; // Replace 'test' with the actual user ID
 
@@ -33,13 +26,46 @@ const ReservaionListforUser = () => {
     fetchData(); // Call the fetchData function when the component mounts
   }, []);
 
-  const handleDelete = async (id) => {
-    // Handle the deletion of a reservation
-    try {
-      await axios.delete(`https://localhost:7084/api/Reservation/${id}`);
-      window.location.reload();
-    } catch (error) {
-      console.error('Error deleting schedule:', error);
+  const handleDelete = async (id, date, SheduleId) => {
+    const currentDate = new Date();
+    const reservationDate = new Date(date);
+    const differenceInDays = Math.floor((reservationDate - currentDate) / (1000 * 60 * 60 * 24));
+
+    
+  
+    if (differenceInDays <= 5) {
+      // Check if the date is within 5 days from today
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Cant delete rerservation with in 5 days',
+       
+      })
+    } else {
+      try {
+        await axios.delete(`https://localhost:7084/api/Reservation/${id}`);
+        
+        window.location.reload();
+      } catch (error) {
+        console.error('Error deleting schedule:', error);
+      }
+    }
+  };
+  const handleEdit = (id, date) => {
+    const currentDate = new Date();
+    const reservationDate = new Date(date);
+    const differenceInDays = Math.floor((reservationDate - currentDate) / (1000 * 60 * 60 * 24));
+
+    if (differenceInDays <= 5) {
+      // Check if the date is within 5 days from today
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "Can't edit reservation within 5 days",
+      });
+      console.log(differenceInDays)
+    } else {
+      window.location.href = `/edit/${id}`;
     }
   };
 
@@ -65,11 +91,16 @@ const ReservaionListforUser = () => {
                 <td>{item.seatcount1}</td>
                 <td>{item.seatcount2}</td>
                 <td>
-                  <a className="btn btn-outline-warning" href={`#`}>
+                  
+                <a
+                    className="btn btn-outline-warning"
+                    href="#"
+                    onClick={() => handleEdit(item.id, item.date)}
+                  >
                     <i className="fas fa-edit"></i>&nbsp;Edit
                   </a>
                   &nbsp;&nbsp;
-                  <a className="btn btn-outline-danger" href="#" onClick={() => handleDelete(item.id)}>
+                  <a className="btn btn-outline-danger" href="#" onClick={() => handleDelete(item.id, item.date ,item.SheduleId)}>
                     <i className="far fa-trash-alt"></i>&nbsp;Delete
                   </a>
                 </td>

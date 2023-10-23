@@ -11,6 +11,9 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './ReservationSearch.css';
 import axios from 'axios';
+import Swal from 'sweetalert2'
+
+
 const ReservationSearch = () => {
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
@@ -75,6 +78,19 @@ const ReservationSearch = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     setLoading(true);
+    const currentDate = new Date();
+    const maxDate = new Date();
+    maxDate.setDate(currentDate.getDate() + 30); 
+    if (date === null || date > maxDate) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please select a date within the next 30 days!',
+       
+      })
+      setLoading(false);
+      return;
+    }
 
     try {
       const formattedDate = formatDateForApi(date);
@@ -119,8 +135,8 @@ const ReservationSearch = () => {
       arrivaltime: selectedRow.arrivaltime,
       class1reservation: selectedRow.class1reservation,
       class2reservation:selectedRow.class2reservation,
-      reserved1seates:seatCount1,
-      reserved2seates:seatCount2,
+      reserved1seates:seatCount1 + selectedRow.reserved1seates,
+      reserved2seates:seatCount2 +selectedRow.reserved2seates,
       stopStations:selectedRow.stopStations,
       date:selectedRow.date
     };

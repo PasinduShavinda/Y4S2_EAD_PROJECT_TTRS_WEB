@@ -5,7 +5,7 @@ Description: CSS styles for filtering trains and creating reservations */
 
 /* Add a margin to the h1 element to create vertical space */
 h1 {
-  margin-top: 200px;
+  margin-top: 400px;
 }
 
 /* Styles for the booking section */
@@ -14,7 +14,7 @@ h1 {
   display: -ms-flexbox;
   display: flex;
   -webkit-transform: translateY(90px);
-  transform: translateY(90px);
+  transform: translateY(10px);
 }
 
 /* Styles for the form container within the booking section */

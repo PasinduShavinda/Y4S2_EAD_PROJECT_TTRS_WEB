@@ -65,15 +65,7 @@ const TrainList = () => {
       <td>{item.class2reservation}</td>
       <td>{item.stopStations.join(', ')}</td> 
       <td><a href={`/shedule/${item.id}`}> <button type="submit" className="btn btn-outline-info"> <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;schedule</button></a>
-      &nbsp;&nbsp;
-      <a className="btn btn-outline-warning" href={`#`}>
-     <i className="fas fa-edit"></i>&nbsp;Edit
-   </a>
-
-   &nbsp;&nbsp;
-   <a className="btn btn-outline-danger" href="#">
-     <i className="far fa-trash-alt"></i>&nbsp;Delete
-   </a>
+     
       </td> 
     </tr>
   ))}

@@ -12,6 +12,7 @@ import 'react-clock/dist/Clock.css';
 import './TrainForm.css';
 import Multiselect from 'multiselect-react-dropdown';
 import TimePicker from 'react-time-picker';
+import Swal from 'sweetalert2'
 function TrainForm() {
   const [Arrivaltime, setArrivaltime] = useState('00:00'); 
   const [Departuretime, setDeparturetime] = useState('00:00'); 
@@ -193,11 +194,25 @@ const handleSubmit = async (e) => {
       const data = await response.json();
       setResponse(data);
       
-      window.location.reload();
+     
+     Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Train details has been saved',
+      showConfirmButton: false,
+      timer: 1500
+    })
+   // window.location.reload();
+
     } else {
       const errorData = await response.json();
       console.error('Error:', response.status, errorData);
-
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+       
+      })
     }
   } catch (error) {
     console.error('Error:', error);

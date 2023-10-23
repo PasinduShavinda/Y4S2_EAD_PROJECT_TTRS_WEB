@@ -22,7 +22,8 @@ import ReservaionListforUser from "./components/ReservationManagement/Reservaion
 
 import BackOfficerMain from "./components/MainComponent/BackOfficerMain";
 import TravelAgentMain from "./components/MainComponent/TravelAgentMain";
-
+import EditReservation from './components/ReservationManagement/ReservationEdit/EditReservation';
+import EditShedule from "./components/TrainManagement/Edit Shedule/EditShedule"
 function App() {
   return (
     <div className="App">
@@ -38,8 +39,9 @@ function App() {
         <Route path="/shedule/:id" element={< TrainSheduls />} exact />
         <Route path="/reservationserch" element={< ReservationSearch />} exact />
         <Route path="/reservationsUser" element={< ReservaionListforUser />} exact />
+        <Route path="/edit/:id" element={<EditReservation/>} exact />
         <Route path='/shvHome' element={<Home/>}></Route>
-
+        <Route path="/EditShedule/:id" element={<EditShedule/>}></Route>
         {/* Login Registration Routes */}
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/register' element={<Register/>}></Route>

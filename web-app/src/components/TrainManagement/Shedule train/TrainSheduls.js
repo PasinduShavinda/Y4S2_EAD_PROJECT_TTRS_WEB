@@ -9,6 +9,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import "./TrainSheduls.css"
+import Swal from 'sweetalert2'
 const TrainSheduls = () => {
   const [inputs, setInputs] = useState({});
   const id = useParams().id;
@@ -78,7 +79,29 @@ const TrainSheduls = () => {
           window.location.reload();
         } catch (error) {
           console.error('Error deleting schedule:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Reserved Train sheduled cant be deleted!',
+           
+          })
         }
+      };
+      const handleEdit = (id, seates1,seates2) => {
+        
+      
+          if (seates1>0 || seates2>0) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Can\'t edit a reserved train shedules!',
+            });
+          } else {
+            // Redirect to the edit page
+
+            history(`/editshedule/${id}`);
+          }
+        
       };
       
 
@@ -153,9 +176,13 @@ const TrainSheduls = () => {
       <td>{item.stopStations.join(', ')}</td> 
       <td>{item.date}</td> 
       <td> 
-      <a className="btn btn-outline-warning" href={`#`}>
-     <i className="fas fa-edit"></i>&nbsp;Edit
-   </a>
+      <a
+  className="btn btn-outline-warning"
+  href={`#`}  onClick={() => handleEdit(item.id, item.reserved1seates,item.Sreserved2seates)}
+ 
+>
+  <i className="fas fa-edit"></i>&nbsp;Edit
+</a>
 
    &nbsp;&nbsp;
    <a className="btn btn-outline-danger" href="#"  onClick={() => handleDelete(item.id)}>

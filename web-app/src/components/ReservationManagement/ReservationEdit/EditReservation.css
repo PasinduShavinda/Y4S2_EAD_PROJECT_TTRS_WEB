@@ -1,0 +1,21 @@
+ .btn-container button {
+    display: inline-block;
+    padding: 7px 65px;
+    background-color: #240a5e;
+    color: #fefdfc;
+    border-radius: 0;
+    border: 1px solid #240a5e;
+    margin-top: 25px;
+    border-radius: 10px;
+  }
+  
+  /* Styles for the submit button on hover */
+  .btn-container button:hover {
+    background-color: transparent;
+    color: #240a5e;
+  }
+  
+  /* Additional styles for the submit button on hover */
+  .btn-container button:hover {
+    color: #1b0847;
+  }
